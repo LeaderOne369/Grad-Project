@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import i18n from '../i18n'
+
+const { t } = useI18n()
+
+// 设置语言的辅助函数
+const setLocale = (lang: string) => {
+  ;(i18n.global.locale as unknown as { value: string }).value = lang
+}
 
 // 默认设置
 const defaultSettings = {
@@ -82,10 +91,19 @@ watch(showSettings, (newValue) => {
     // 打开弹窗时，同步当前设置到临时设置
     tempSettings.value = { ...settings.value }
   } else {
-    // 关闭弹窗时，重置临时设置（以防用户修改后取消）
+    // 关闭弹窗时，重置临时设置和语言（以防用户修改后取消）
     tempSettings.value = { ...settings.value }
+    setLocale(settings.value.language)
   }
 })
+
+// 监听临时语言设置变化，实时预览语言切换效果
+watch(
+  () => tempSettings.value.language,
+  (newLang) => {
+    setLocale(newLang)
+  },
+)
 
 const toggleSettings = () => {
   showSettings.value = !showSettings.value
@@ -100,6 +118,8 @@ const saveSettings = () => {
   settings.value = { ...tempSettings.value }
   // 保存到localStorage
   localStorage.setItem('gozu-settings', JSON.stringify(settings.value))
+  // 同步 i18n 语言设置
+  setLocale(settings.value.language)
   console.log('设置已保存:', settings.value)
   closeSettings()
 }
@@ -139,7 +159,7 @@ const closeAbout = () => {
             <span v-else-if="role === 'manufacturer'">制造商模式</span>
             <span v-else-if="role === 'buyer'">购买者模式</span>
           </div>
-          <button class="settings-btn" @click="toggleAbout" aria-label="关于">
+          <button class="settings-btn" @click="toggleAbout" :aria-label="t('common.about')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -156,7 +176,7 @@ const closeAbout = () => {
               <line x1="12" y1="8" x2="12.01" y2="8" />
             </svg>
           </button>
-          <button class="settings-btn" @click="toggleSettings" aria-label="设置">
+          <button class="settings-btn" @click="toggleSettings" :aria-label="t('common.settings')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -185,8 +205,12 @@ const closeAbout = () => {
           <Transition name="settings-scale">
             <div v-if="showSettings" class="settings-modal" @click.stop>
               <div class="settings-modal__header">
-                <h2>设置</h2>
-                <button class="settings-modal__close" @click="closeSettings" aria-label="关闭">
+                <h2>{{ t('settings.title') }}</h2>
+                <button
+                  class="settings-modal__close"
+                  @click="closeSettings"
+                  :aria-label="t('common.close')"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -205,24 +229,28 @@ const closeAbout = () => {
               </div>
               <div class="settings-modal__body">
                 <div class="settings-section">
-                  <h3>外观</h3>
+                  <h3>{{ t('settings.appearance') }}</h3>
                   <div class="settings-item">
                     <div class="settings-item__info">
-                      <span class="settings-item__label">语言</span>
-                      <span class="settings-item__desc">选择界面显示语言</span>
+                      <span class="settings-item__label">{{ t('settings.language') }}</span>
+                      <span class="settings-item__desc">{{ t('settings.languageDesc') }}</span>
                     </div>
                     <select class="settings-select" v-model="tempSettings.language">
-                      <option value="zh">简体中文</option>
-                      <option value="en">English</option>
+                      <option value="zh">{{ t('settings.chinese') }}</option>
+                      <option value="en">{{ t('settings.english') }}</option>
                     </select>
                   </div>
                 </div>
                 <div class="settings-section">
-                  <h3>通知</h3>
+                  <h3>{{ t('settings.notifications') }}</h3>
                   <div class="settings-item">
                     <div class="settings-item__info">
-                      <span class="settings-item__label">推送通知</span>
-                      <span class="settings-item__desc">接收订单和系统消息</span>
+                      <span class="settings-item__label">{{
+                        t('settings.pushNotifications')
+                      }}</span>
+                      <span class="settings-item__desc">{{
+                        t('settings.pushNotificationsDesc')
+                      }}</span>
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" v-model="tempSettings.pushNotifications" />
@@ -231,8 +259,12 @@ const closeAbout = () => {
                   </div>
                   <div class="settings-item">
                     <div class="settings-item__info">
-                      <span class="settings-item__label">邮件通知</span>
-                      <span class="settings-item__desc">通过邮件接收重要更新</span>
+                      <span class="settings-item__label">{{
+                        t('settings.emailNotifications')
+                      }}</span>
+                      <span class="settings-item__desc">{{
+                        t('settings.emailNotificationsDesc')
+                      }}</span>
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" v-model="tempSettings.emailNotifications" />
@@ -242,8 +274,12 @@ const closeAbout = () => {
                 </div>
               </div>
               <div class="settings-modal__actions">
-                <button class="settings-btn--secondary" @click="resetSettings">恢复默认</button>
-                <button class="settings-btn--primary" @click="saveSettings">确认</button>
+                <button class="settings-btn--secondary" @click="resetSettings">
+                  {{ t('settings.resetDefault') }}
+                </button>
+                <button class="settings-btn--primary" @click="saveSettings">
+                  {{ t('settings.confirm') }}
+                </button>
               </div>
             </div>
           </Transition>
@@ -251,7 +287,6 @@ const closeAbout = () => {
       </Transition>
     </Teleport>
 
-    <!-- About Modal Overlay -->
     <Teleport to="body">
       <Transition name="settings-fade">
         <div v-if="showAbout" class="settings-overlay" @click="closeAbout">
@@ -261,7 +296,7 @@ const closeAbout = () => {
                 <img src="/images/logo.png" alt="GOZU Logo" class="about-modal__logo" />
                 <div class="about-modal__title-section">
                   <h1>GOZU</h1>
-                  <p class="about-modal__tagline">动漫创意平台</p>
+                  <p class="about-modal__tagline">{{ t('about.tagline') }}</p>
                 </div>
               </div>
               <div class="about-modal__body">
@@ -284,11 +319,8 @@ const closeAbout = () => {
                     </svg>
                   </div>
                   <div class="about-card__content">
-                    <h3>项目简介</h3>
-                    <p>
-                      GOZU 是一个连接设计者、制造商与购买者的动漫 IP 定制平台。通过 Gemini AI
-                      技术，实现图案的智能生成、风格迁移与跨载体适配。
-                    </p>
+                    <h3>{{ t('about.projectIntro') }}</h3>
+                    <p>{{ t('about.projectIntroDesc') }}</p>
                   </div>
                 </div>
                 <div class="about-card">
@@ -309,9 +341,9 @@ const closeAbout = () => {
                     </svg>
                   </div>
                   <div class="about-card__content">
-                    <h3>开发者</h3>
-                    <p>徐力行</p>
-                    <p class="about-card__sub">合肥工业大学软件学院</p>
+                    <h3>{{ t('about.developer') }}</h3>
+                    <p>{{ t('about.developerName') }}</p>
+                    <p class="about-card__sub">{{ t('about.developerSchool') }}</p>
                   </div>
                 </div>
                 <div class="about-card">
@@ -334,9 +366,9 @@ const closeAbout = () => {
                     </svg>
                   </div>
                   <div class="about-card__content">
-                    <h3>项目信息</h3>
-                    <p>2024-2025 学年毕业设计项目</p>
-                    <p class="about-card__sub">版本 1.0.0 • 构建于 Vue 3 + FastAPI + Gemini</p>
+                    <h3>{{ t('about.projectInfo') }}</h3>
+                    <p>{{ t('about.projectInfoDesc') }}</p>
+                    <p class="about-card__sub">{{ t('about.projectInfoSub') }}</p>
                   </div>
                 </div>
                 <div class="about-card">
@@ -358,11 +390,9 @@ const closeAbout = () => {
                     </svg>
                   </div>
                   <div class="about-card__content">
-                    <h3>版权声明</h3>
-                    <p>Copyright © 2026 徐力行. All rights reserved.</p>
-                    <p class="about-card__sub">
-                      本项目仅供学术教育用途。项目中涉及的动漫素材版权归原作者所有。未经授权，不得用于商业用途。
-                    </p>
+                    <h3>{{ t('about.copyright') }}</h3>
+                    <p>{{ t('about.copyrightNotice') }}</p>
+                    <p class="about-card__sub">{{ t('about.copyrightDesc') }}</p>
                   </div>
                 </div>
               </div>
@@ -374,7 +404,11 @@ const closeAbout = () => {
                   <span>Gemini AI</span>
                 </div>
               </div>
-              <button class="about-modal__close" @click="closeAbout" aria-label="关闭">
+              <button
+                class="about-modal__close"
+                @click="closeAbout"
+                :aria-label="t('common.close')"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"

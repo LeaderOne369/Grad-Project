@@ -31,8 +31,9 @@
     "three": "^0.179.1",
     "vega-lite": "^6.3.1",
     "vue": "^3.5.25",
-    "vue3-apexcharts": "^1.8.0",
-    "vue-router": "^4.6.3"
+    "vue-i18n": "^9.14.5",
+    "vue-router": "^4.6.3",
+    "vue3-apexcharts": "^1.8.0"
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.3",
