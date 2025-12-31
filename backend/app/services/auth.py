@@ -11,19 +11,19 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 DEFAULT_USERS = [
     {
-        "username": "admin1",
+        "username": "creator",
         "display_name": "星图设计者",
         "role": "creator",
         "password": "123456",
     },
     {
-        "username": "admin2",
+        "username": "manufacturer",
         "display_name": "匠造制造商",
         "role": "manufacturer",
         "password": "123456",
     },
     {
-        "username": "admin3",
+        "username": "buyer",
         "display_name": "漫游购买者",
         "role": "buyer",
         "password": "123456",

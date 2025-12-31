@@ -103,13 +103,13 @@ const goRegister = () => {
             <span>快速登录：</span>
             <div class="quick-links">
               <button type="button" class="inline-link" @click="fillAccount(0)">
-                设计者 admin1
+                设计者
               </button>
               <button type="button" class="inline-link" @click="fillAccount(1)">
-                制造商 admin2
+                制造商
               </button>
               <button type="button" class="inline-link" @click="fillAccount(2)">
-                购买者 admin3
+                购买者
               </button>
             </div>
           </div>

@@ -100,7 +100,7 @@ const goNext = () => {
       <div class="flow-panel">
         <h2>上传图片或描述灵感</h2>
         <div class="input-stack">
-          <label>
+          <label class="vertical-label">
             灵感描述
             <textarea v-model="prompt" placeholder="例如：希望是霓虹赛博风格，带有能量轨迹和机甲元素"></textarea>
           </label>

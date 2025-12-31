@@ -18,20 +18,21 @@ export const DEFAULT_ACCOUNTS: Array<{
   role: UserRole
 }> = [
   {
-    username: 'admin1',
+    username: 'creator',
     password: '123456',
     displayName: '星图设计者',
     role: 'creator',
   },
   {
-    username: 'admin2',
+    username: 'manufacturer',
     password: '123456',
     displayName: '匠造制造商',
     role: 'manufacturer',
   },
   {
-    username: 'admin3',
-    password: '漫游购买者',
+    username: 'buyer',
+    password: '123456',
+    displayName: '漫游购买者',
     role: 'buyer',
   },
 ]
