@@ -16,6 +16,13 @@ import BuyerCustomizeDesignView from '@/pages/BuyerCustomizeDesignView.vue'
 import BuyerCustomizePreviewView from '@/pages/BuyerCustomizePreviewView.vue'
 import BuyerCustomizeThankYouView from '@/pages/BuyerCustomizeThankYouView.vue'
 import NotFoundView from '@/pages/NotFoundView.vue'
+import AdminLayout from '@/components/AdminLayout.vue'
+import AdminDashboardView from '@/pages/AdminDashboardView.vue'
+import AdminUsersView from '@/pages/AdminUsersView.vue'
+import AdminOrdersView from '@/pages/AdminOrdersView.vue'
+import AdminReviewView from '@/pages/AdminReviewView.vue'
+import AdminAnalyticsView from '@/pages/AdminAnalyticsView.vue'
+import AdminSettingsView from '@/pages/AdminSettingsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +71,18 @@ const router = createRouter({
       path: '/buyer/customize/thank-you',
       name: 'buyer-customize-thank-you',
       component: BuyerCustomizeThankYouView,
+    },
+    {
+      path: '/admin',
+      component: AdminLayout,
+      children: [
+        { path: '', name: 'admin-dashboard', component: AdminDashboardView },
+        { path: 'users', name: 'admin-users', component: AdminUsersView },
+        { path: 'orders', name: 'admin-orders', component: AdminOrdersView },
+        { path: 'review', name: 'admin-review', component: AdminReviewView },
+        { path: 'analytics', name: 'admin-analytics', component: AdminAnalyticsView },
+        { path: 'settings', name: 'admin-settings', component: AdminSettingsView },
+      ],
     },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView },
   ],

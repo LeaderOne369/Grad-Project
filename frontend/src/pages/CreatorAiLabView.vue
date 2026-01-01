@@ -1,48 +1,53 @@
 <script setup lang="ts">
-const projects = [
-  {
-    title: '星火骑士 · 霓虹燃域',
-    desc: '文生图 + 围巾迁移，已生成 4 个版本。',
-    status: 'Gemini 已完成',
-  },
-  {
-    title: '霜月物语 · 冰川旅人',
-    desc: '图生图 + 徽章套装，等待二次调整。',
-    status: '等待优化',
-  },
-  {
-    title: '夜航便利店 · 24h 霓虹',
-    desc: '跨载体套装：挂件 / 帽子 / 手机壳',
-    status: '推荐中',
-  },
-]
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const pipeline = [
-  { label: '文生图', value: '6 组' },
-  { label: '图生图', value: '4 组' },
-  { label: '跨载体', value: '3 组' },
-]
+const { t } = useI18n()
+
+const projects = computed(() => [
+  {
+    title: t('creator.aiLab.projectsList[0].title'),
+    desc: t('creator.aiLab.projectsList[0].desc'),
+    status: t('creator.aiLab.projects.completed'),
+  },
+  {
+    title: t('creator.aiLab.projectsList[1].title'),
+    desc: t('creator.aiLab.projectsList[1].desc'),
+    status: t('creator.aiLab.projects.waiting'),
+  },
+  {
+    title: t('creator.aiLab.projectsList[2].title'),
+    desc: t('creator.aiLab.projectsList[2].desc'),
+    status: t('creator.aiLab.projects.recommended'),
+  },
+])
+
+const pipeline = computed(() => [
+  { label: t('creator.aiLab.pipeline.labels[0]'), value: '6 组' },
+  { label: t('creator.aiLab.pipeline.labels[1]'), value: '4 组' },
+  { label: t('creator.aiLab.pipeline.labels[2]'), value: '3 组' },
+])
 </script>
 
 <template>
   <div class="detail-page detail-page--ai">
     <header class="detail-hero">
       <div>
-        <p class="hero-tag">Gemini Ready</p>
-        <h1>AI 灵感实验室</h1>
-        <p class="hero-subtitle">用 Gemini 生成主题稿、风格迁移与跨载体套装。</p>
+        <p class="hero-tag">{{ t('creator.aiLab.hero.tag') }}</p>
+        <h1>{{ t('creator.aiLab.hero.title') }}</h1>
+        <p class="hero-subtitle">{{ t('creator.aiLab.hero.subtitle') }}</p>
       </div>
       <div class="detail-hero-card">
-        <span>今日活跃任务</span>
-        <strong>3</strong>
-        <p>自动汇总你的文生图与迁移进度。</p>
-        <button class="primary-btn">启动新任务</button>
+        <span>{{ t('creator.aiLab.hero.cardTitle') }}</span>
+        <strong>{{ t('creator.aiLab.hero.cardValue') }}</strong>
+        <p>{{ t('creator.aiLab.hero.cardDesc') }}</p>
+        <button class="primary-btn">{{ t('creator.aiLab.hero.btn') }}</button>
       </div>
     </header>
 
     <section class="detail-grid">
       <div class="detail-panel">
-        <h2>流程概览</h2>
+        <h2>{{ t('creator.aiLab.pipeline.title') }}</h2>
         <div class="panel-stats">
           <div v-for="item in pipeline" :key="item.label">
             <strong>{{ item.value }}</strong>

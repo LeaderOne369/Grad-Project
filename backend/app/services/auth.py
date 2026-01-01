@@ -28,6 +28,12 @@ DEFAULT_USERS = [
         "role": "buyer",
         "password": "123456",
     },
+    {
+        "username": "admin",
+        "display_name": "系统管理员",
+        "role": "admin",
+        "password": "123456",
+    },
 ]
 
 

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 type Draft = {
   id: string
@@ -15,41 +18,41 @@ type AiResult = {
   createdAt: string
 }
 
-const highlights = [
+const highlights = computed(() => [
   {
-    title: 'AI 灵感实验室',
-    description: '用 Gemini 生成主题稿、风格迁移与跨载体套装。',
-    tag: 'Gemini Ready',
+    title: t('creator.home.highlights.aiLab.title'),
+    description: t('creator.home.highlights.aiLab.description'),
+    tag: t('creator.home.highlights.aiLab.tag'),
   },
   {
-    title: '我的作品池',
-    description: '管理设计版本、授权状态与收益分成。',
-    tag: '12 个项目',
+    title: t('creator.home.highlights.works.title'),
+    description: t('creator.home.highlights.works.description'),
+    tag: t('creator.home.highlights.works.tag'),
   },
   {
-    title: '推荐趋势榜',
-    description: '把握热门 IP 与风格走势，调整上新节奏。',
-    tag: '上升中',
+    title: t('creator.home.highlights.trends.title'),
+    description: t('creator.home.highlights.trends.description'),
+    tag: t('creator.home.highlights.trends.tag'),
   },
-]
+])
 
-const focusCards = [
+const focusCards = computed(() => [
   {
-    label: '今日任务',
-    title: '设计「星火骑士」围巾 + 徽章联动套装',
-    detail: '建议风格：霓虹赛博 / 深蓝金属',
+    label: t('creator.home.focusCards.task.label'),
+    title: t('creator.home.focusCards.task.title'),
+    detail: t('creator.home.focusCards.task.detail'),
   },
   {
-    label: 'AI 工作流',
-    title: '图案迁移：手机壳 → 毛绒挂件',
-    detail: '分辨率 2K / 安全区自动调整',
+    label: t('creator.home.focusCards.workflow.label'),
+    title: t('creator.home.focusCards.workflow.title'),
+    detail: t('creator.home.focusCards.workflow.detail'),
   },
   {
-    label: '收益概览',
-    title: '本周预估收益 ¥3,420',
-    detail: '转化率 +12%，收藏 +230',
+    label: t('creator.home.focusCards.revenue.label'),
+    title: t('creator.home.focusCards.revenue.title'),
+    detail: t('creator.home.focusCards.revenue.detail'),
   },
-]
+])
 
 const drafts = ref<Draft[]>([])
 const results = ref<AiResult[]>([])
@@ -79,15 +82,13 @@ onMounted(() => {
   <div class="home-page home-page--creator">
     <header class="home-hero">
       <div>
-        <p class="hero-tag">设计者工作台</p>
-        <h1>把 IP 世界重塑成系列谷子</h1>
-        <p class="hero-subtitle">
-          你的灵感从这里开始：Gemini 生成、跨载体适配、作品推荐与收益追踪全部连在一起。
-        </p>
+        <p class="hero-tag">{{ t('creator.home.hero.tag') }}</p>
+        <h1>{{ t('creator.home.hero.title') }}</h1>
+        <p class="hero-subtitle">{{ t('creator.home.hero.subtitle') }}</p>
       </div>
       <div class="hero-actions">
-        <RouterLink class="primary-btn" to="/ai-studio">进入 AI 设计室</RouterLink>
-        <button class="secondary-btn">发布新设计</button>
+        <RouterLink class="primary-btn" to="/ai-studio">{{ t('creator.home.hero.btnPrimary') }}</RouterLink>
+        <button class="secondary-btn">{{ t('creator.home.hero.btnSecondary') }}</button>
       </div>
     </header>
 
@@ -111,20 +112,20 @@ onMounted(() => {
 
     <section class="home-split">
       <div class="feature-panel">
-        <h2>推荐灵感矩阵</h2>
-        <p>基于风格向量与 IP 热度的实时建议，帮助你提前布局下一波爆款。</p>
+        <h2>{{ t('creator.home.matrix.title') }}</h2>
+        <p>{{ t('creator.home.matrix.subtitle') }}</p>
         <div class="panel-stats">
           <div>
             <strong>86%</strong>
-            <span>风格匹配</span>
+            <span>{{ t('creator.home.matrix.stats.styleMatch') }}</span>
           </div>
           <div>
             <strong>24</strong>
-            <span>热度 IP</span>
+            <span>{{ t('creator.home.matrix.stats.hotIPs') }}</span>
           </div>
           <div>
             <strong>5</strong>
-            <span>可迁移载体</span>
+            <span>{{ t('creator.home.matrix.stats.carriers') }}</span>
           </div>
         </div>
       </div>
@@ -140,21 +141,21 @@ onMounted(() => {
     <section class="home-split">
       <div class="list-panel">
         <div class="list-header">
-          <h3>最近草稿</h3>
-          <RouterLink class="inline-link" to="/ai-studio">进入设计室</RouterLink>
+          <h3>{{ t('creator.home.drafts.title') }}</h3>
+          <RouterLink class="inline-link" to="/ai-studio">{{ t('creator.home.drafts.link') }}</RouterLink>
         </div>
         <div v-if="drafts.length" class="list-grid">
           <div v-for="draft in drafts" :key="draft.id" class="list-card">
             <h4>{{ draft.title }}</h4>
-            <p>更新于 {{ draft.updatedAt }}</p>
+            <p>{{ t('creator.home.results.updated') }} {{ draft.updatedAt }}</p>
           </div>
         </div>
-        <p v-else class="empty-state">暂无草稿，去 AI 设计室开始创作吧。</p>
+        <p v-else class="empty-state">{{ t('creator.home.drafts.empty') }}</p>
       </div>
       <div class="list-panel">
         <div class="list-header">
-          <h3>AI 生成记录</h3>
-          <button class="inline-link">查看全部</button>
+          <h3>{{ t('creator.home.results.title') }}</h3>
+          <button class="inline-link">{{ t('creator.home.results.viewAll') }}</button>
         </div>
         <div v-if="results.length" class="list-grid">
           <div v-for="item in results" :key="item.id" class="list-card">
@@ -162,7 +163,7 @@ onMounted(() => {
             <p>{{ item.status }} · {{ item.createdAt }}</p>
           </div>
         </div>
-        <p v-else class="empty-state">尚未生成作品，建议先完成一次文生图。</p>
+        <p v-else class="empty-state">{{ t('creator.home.results.empty') }}</p>
       </div>
     </section>
   </div>

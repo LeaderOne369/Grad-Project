@@ -35,6 +35,233 @@ export default {
     about: 'About',
     settings: 'Settings',
   },
+  creator: {
+    // 主页
+    home: {
+      hero: {
+        tag: 'Designer Workspace',
+        title: 'Reshape IP Worlds into Series of Gu Zi',
+        subtitle:
+          'Your inspiration starts here: Gemini generation, cross-carrier adaptation, work recommendations and revenue tracking all connected.',
+        btnPrimary: 'Enter AI Design Studio',
+        btnSecondary: 'Publish New Design',
+      },
+      highlights: {
+        aiLab: {
+          title: 'AI Inspiration Lab',
+          description:
+            'Use Gemini to generate theme drafts, style migration and cross-carrier combinations.',
+          tag: 'Gemini Ready',
+        },
+        works: {
+          title: 'My Works Pool',
+          description: 'Manage design versions, authorization status and revenue sharing.',
+          tag: '12 Projects',
+        },
+        trends: {
+          title: 'Recommended Trends List',
+          description: 'Grasp popular IP and style trends, adjust new product rhythm.',
+          tag: 'Rising',
+        },
+      },
+      matrix: {
+        title: 'Recommended Inspiration Matrix',
+        subtitle:
+          'Real-time suggestions based on style vectors and IP popularity to help you plan the next wave of hits in advance.',
+        stats: {
+          styleMatch: 'Style Match',
+          hotIPs: 'Hot IPs',
+          carriers: 'Migratable Carriers',
+        },
+      },
+      focusCards: {
+        task: {
+          label: "Today's Task",
+          title: 'Design "Stardust Knight" Scarf + Badge Combination Set',
+          detail: 'Suggested Style: Neon Cyberpunk / Deep Blue Metal',
+        },
+        workflow: {
+          label: 'AI Workflow',
+          title: 'Pattern Migration: Phone Case → Plush Pendant',
+          detail: 'Resolution 2K / Safety Area Auto-adjust',
+        },
+        revenue: {
+          label: 'Revenue Overview',
+          title: 'Estimated Revenue ¥3,420 This Week',
+          detail: 'Conversion +12%, Collections +230',
+        },
+      },
+      drafts: {
+        title: 'Recent Drafts',
+        empty: 'No drafts yet, start creating in AI Design Studio.',
+        link: 'Enter Design Studio',
+      },
+      results: {
+        title: 'AI Generation Records',
+        empty: 'No works generated yet, try completing a text-to-image first.',
+        viewAll: 'View All',
+        updated: 'Updated on',
+      },
+    },
+    // AI实验室
+    aiLab: {
+      hero: {
+        tag: 'Gemini Ready',
+        title: 'AI Inspiration Laboratory',
+        subtitle:
+          'Use Gemini to generate theme drafts, style migration and cross-carrier combinations.',
+        cardTitle: "Today's Active Tasks",
+        cardValue: '3',
+        cardDesc: 'Automatically summarize your text-to-image and migration progress.',
+        btn: 'Start New Task',
+      },
+      pipeline: {
+        title: 'Process Overview',
+        labels: ['Text-to-Image', 'Image-to-Image', 'Cross-Carrier'],
+      },
+      projects: {
+        completed: 'Gemini Completed',
+        waiting: 'Waiting for Optimization',
+        recommended: 'Recommending',
+      },
+      projectsList: [
+        {
+          title: 'Stardust Knight · Neon Burning Domain',
+          desc: 'Text-to-Image + Scarf Migration, 4 versions generated.',
+        },
+        {
+          title: 'Frost Moon Tales · Glacier Traveler',
+          desc: 'Image-to-Image + Badge Set, waiting for secondary adjustment.',
+        },
+        {
+          title: 'Night Voyage Convenience Store · 24h Neon',
+          desc: 'Cross-carrier set: Pendant / Hat / Phone Case',
+        },
+      ],
+    },
+    // 作品池
+    works: {
+      hero: {
+        tag: '12 Projects',
+        title: 'My Works Pool',
+        subtitle: 'Manage design versions, authorization status and revenue sharing.',
+        cardTitle: 'Works Overview',
+        cardValue: '12',
+        cardDesc: 'Creation progress and revenue at a glance.',
+        btn: 'Add New Work',
+      },
+      stats: {
+        title: 'Revenue & Authorization',
+        labels: ['Monthly Revenue', 'Published Works', 'Authorized'],
+      },
+      worksList: [
+        {
+          title: 'Stardust Knight · Nebula Series',
+          status: 'Published',
+          income: '¥1,240',
+        },
+        {
+          title: 'Frost Moon Tales · Glacier Traveler',
+          status: 'Under Review',
+          income: '¥860',
+        },
+        {
+          title: 'Night Voyage Convenience Store · 24h Neon',
+          status: 'Draft',
+          income: '¥0',
+        },
+      ],
+      status: {
+        published: 'Published',
+        reviewing: 'Under Review',
+        draft: 'Draft',
+      },
+    },
+    // 趋势榜
+    trends: {
+      hero: {
+        tag: 'Rising',
+        title: 'Recommended Trends List',
+        subtitle: 'Grasp popular IP and style trends, adjust new product rhythm.',
+        cardTitle: 'Recommendation Index',
+        cardValue: '87',
+        cardDesc: 'Style matching + popularity + content collaboration comprehensive scoring.',
+        btn: 'Generate Topic Suggestions',
+      },
+      signals: {
+        title: 'Trend Signals',
+        stats: ['Popularity Index', 'New IPs', 'Migratable Carriers'],
+        insight: {
+          title: 'Key Observation',
+          content:
+            'Neon cyberpunk style shows significant conversion rate improvement on accessory carriers.',
+        },
+      },
+      insightsTitle: 'Trend Insights',
+      insightsLabel: 'Trend Hint',
+      insights: [
+        {
+          title: 'IP Popularity List',
+          desc: 'Stardust Knight, Night Voyage Convenience Store, Frost Moon Tales continue to rise.',
+        },
+        {
+          title: 'Style Preferences',
+          desc: 'Neon cyberpunk and Japanese fresh style share increased by 18%.',
+        },
+        {
+          title: 'Carrier Trends',
+          desc: 'Scarf and badge combination sets have the highest conversion rate.',
+        },
+      ],
+    },
+    // AI设计室
+    aiStudio: {
+      moodTags: ['Neon Cyberpunk', 'Japanese Fresh', 'Dark Steam', 'Retro Pixel', 'Dreamy Girl'],
+      carriers: ['Scarf', 'Hat', 'Acrylic Stand', 'Badge', 'Pendant', 'Phone Case'],
+      workflowSteps: [
+        {
+          title: 'Input Theme + IP',
+          detail: 'Define character and worldview keywords, set color scheme and composition.',
+        },
+        {
+          title: 'Gemini Generation & Migration',
+          detail: 'Generate multiple style versions at once and adapt to multiple carriers.',
+        },
+        {
+          title: 'Review & Publish',
+          detail: 'Confirm copyright and safety areas, publish to recommendation pool.',
+        },
+      ],
+      form: {
+        labels: {
+          theme: 'Theme',
+          ipWorld: 'IP World',
+          prompt: 'Generation Prompt',
+          carriers: 'Target Carriers',
+        },
+        placeholders: {
+          theme: 'e.g., Stardust Knight, Frost Moon Tales',
+          ipWorld: 'e.g., Cyberpunk, Magical Girl',
+          prompt: 'Describe the pattern style and elements you want...',
+        },
+        btnGenerate: 'Start Generation',
+        btnSave: 'Save Draft',
+      },
+      tasks: {
+        running: 'Generating',
+        success: 'Generated',
+        waiting: 'Waiting for Migration',
+      },
+      preview: {
+        title: 'Generation Preview',
+        noPreview: 'No preview generated yet',
+      },
+      drafts: {
+        title: 'Draft List',
+        empty: 'No drafts',
+      },
+    },
+  },
   auth: {
     // 登录页面
     login: {
@@ -72,6 +299,7 @@ export default {
           creator: 'Designer',
           manufacturer: 'Manufacturer',
           buyer: 'Buyer',
+          admin: 'Admin',
         },
         submitBtn: 'Enter the Gu Zi Star Chart',
         registerBtn: 'Create New Account',

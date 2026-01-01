@@ -1,4 +1,4 @@
-export type UserRole = 'buyer' | 'creator' | 'manufacturer'
+export type UserRole = 'buyer' | 'creator' | 'manufacturer' | 'admin'
 
 export type MockUser = {
   id: string
@@ -34,6 +34,12 @@ export const DEFAULT_ACCOUNTS: Array<{
     password: '123456',
     displayName: '漫游购买者',
     role: 'buyer',
+  },
+  {
+    username: 'admin',
+    password: '123456',
+    displayName: '系统管理员',
+    role: 'admin',
   },
 ]
 
@@ -91,15 +97,16 @@ export function registerUser(payload: {
   return { ok: true }
 }
 
-export function authenticate(payload: {
-  username: string
-  password: string
-}): { ok: boolean; error?: string; user?: MockUser } {
+export function authenticate(payload: { username: string; password: string }): {
+  ok: boolean
+  error?: string
+  user?: MockUser
+} {
   const { username, password } = payload
   const normalized = username.trim().toLowerCase()
 
   const defaultAccount = DEFAULT_ACCOUNTS.find(
-    (account) => account.username === normalized && account.password === password
+    (account) => account.username === normalized && account.password === password,
   )
   if (defaultAccount) {
     return {
@@ -116,9 +123,7 @@ export function authenticate(payload: {
   }
 
   const users = loadUsers()
-  const matched = users.find(
-    (user) => user.username === normalized && user.password === password
-  )
+  const matched = users.find((user) => user.username === normalized && user.password === password)
 
   if (!matched) {
     return { ok: false, error: '账号或密码错误，请重试。' }

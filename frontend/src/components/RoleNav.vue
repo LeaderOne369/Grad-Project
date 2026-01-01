@@ -56,7 +56,11 @@ const isGuestPage = computed(() => {
   return route.path === '/login' || route.path === '/register'
 })
 
-const showNav = computed(() => true)
+const isAdminPage = computed(() => {
+  return route.path.startsWith('/admin')
+})
+
+const showNav = computed(() => !isAdminPage.value)
 
 const navItems = computed(() => {
   switch (role.value) {

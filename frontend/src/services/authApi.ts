@@ -2,7 +2,7 @@ export type AuthUser = {
   id: number
   username: string
   displayName: string
-  role: 'buyer' | 'creator' | 'manufacturer'
+  role: 'buyer' | 'creator' | 'manufacturer' | 'admin'
 }
 
 export type LoginResponse = {

@@ -35,6 +35,228 @@ export default {
     about: '关于',
     settings: '设置',
   },
+  creator: {
+    // 主页
+    home: {
+      hero: {
+        tag: '设计者工作台',
+        title: '把 IP 世界重塑成系列谷子',
+        subtitle: '你的灵感从这里开始：Gemini 生成、跨载体适配、作品推荐与收益追踪全部连在一起。',
+        btnPrimary: '进入 AI 设计室',
+        btnSecondary: '发布新设计',
+      },
+      highlights: {
+        aiLab: {
+          title: 'AI 灵感实验室',
+          description: '用 Gemini 生成主题稿、风格迁移与跨载体套装。',
+          tag: 'Gemini Ready',
+        },
+        works: {
+          title: '我的作品池',
+          description: '管理设计版本、授权状态与收益分成。',
+          tag: '12 个项目',
+        },
+        trends: {
+          title: '推荐趋势榜',
+          description: '把握热门 IP 与风格走势，调整上新节奏。',
+          tag: '上升中',
+        },
+      },
+      matrix: {
+        title: '推荐灵感矩阵',
+        subtitle: '基于风格向量与 IP 热度的实时建议，帮助你提前布局下一波爆款。',
+        stats: {
+          styleMatch: '风格匹配',
+          hotIPs: '热度 IP',
+          carriers: '可迁移载体',
+        },
+      },
+      focusCards: {
+        task: {
+          label: '今日任务',
+          title: '设计「星火骑士」围巾 + 徽章联动套装',
+          detail: '建议风格：霓虹赛博 / 深蓝金属',
+        },
+        workflow: {
+          label: 'AI 工作流',
+          title: '图案迁移：手机壳 → 毛绒挂件',
+          detail: '分辨率 2K / 安全区自动调整',
+        },
+        revenue: {
+          label: '收益概览',
+          title: '本周预估收益 ¥3,420',
+          detail: '转化率 +12%，收藏 +230',
+        },
+      },
+      drafts: {
+        title: '最近草稿',
+        empty: '暂无草稿，去 AI 设计室开始创作吧。',
+        link: '进入设计室',
+      },
+      results: {
+        title: 'AI 生成记录',
+        empty: '尚未生成作品，建议先完成一次文生图。',
+        viewAll: '查看全部',
+        updated: '更新于',
+      },
+    },
+    // AI实验室
+    aiLab: {
+      hero: {
+        tag: 'Gemini Ready',
+        title: 'AI 灵感实验室',
+        subtitle: '用 Gemini 生成主题稿、风格迁移与跨载体套装。',
+        cardTitle: '今日活跃任务',
+        cardValue: '3',
+        cardDesc: '自动汇总你的文生图与迁移进度。',
+        btn: '启动新任务',
+      },
+      pipeline: {
+        title: '流程概览',
+        labels: ['文生图', '图生图', '跨载体'],
+      },
+      projects: {
+        completed: 'Gemini 已完成',
+        waiting: '等待优化',
+        recommended: '推荐中',
+      },
+      projectsList: [
+        {
+          title: '星火骑士 · 霓虹燃域',
+          desc: '文生图 + 围巾迁移，已生成 4 个版本。',
+        },
+        {
+          title: '霜月物语 · 冰川旅人',
+          desc: '图生图 + 徽章套装，等待二次调整。',
+        },
+        {
+          title: '夜航便利店 · 24h 霓虹',
+          desc: '跨载体套装：挂件 / 帽子 / 手机壳',
+        },
+      ],
+    },
+    // 作品池
+    works: {
+      hero: {
+        tag: '12 个项目',
+        title: '我的作品池',
+        subtitle: '管理设计版本、授权状态与收益分成。',
+        cardTitle: '作品总览',
+        cardValue: '12',
+        cardDesc: '创作进度与收益一目了然。',
+        btn: '新增作品',
+      },
+      stats: {
+        title: '收益与授权',
+        labels: ['本月收益', '发布作品', '授权通过'],
+      },
+      worksList: [
+        {
+          title: '星火骑士 · 星云系列',
+          status: '已发布',
+          income: '¥1,240',
+        },
+        {
+          title: '霜月物语 · 冰川旅人',
+          status: '审核中',
+          income: '¥860',
+        },
+        {
+          title: '夜航便利店 · 24h 霓虹',
+          status: '草稿',
+          income: '¥0',
+        },
+      ],
+      status: {
+        published: '已发布',
+        reviewing: '审核中',
+        draft: '草稿',
+      },
+    },
+    // 趋势榜
+    trends: {
+      hero: {
+        tag: '上升中',
+        title: '推荐趋势榜',
+        subtitle: '把握热门 IP 与风格走势，调整上新节奏。',
+        cardTitle: '推荐指数',
+        cardValue: '87',
+        cardDesc: '风格匹配 + 热度 + 内容联动综合评分。',
+        btn: '生成选题建议',
+      },
+      signals: {
+        title: '趋势信号',
+        stats: ['热度指数', '新增 IP', '可迁移载体'],
+        insight: {
+          title: '重点观察',
+          content: '霓虹赛博风格在配饰类载体上转化率提升明显。',
+        },
+      },
+      insightsTitle: '趋势洞察',
+      insightsLabel: '趋势提示',
+      insights: [
+        {
+          title: 'IP 热度榜',
+          desc: '星火骑士、夜航便利店、霜月物语持续上升。',
+        },
+        {
+          title: '风格偏好',
+          desc: '霓虹赛博与日式清新占比增长 18%。',
+        },
+        {
+          title: '载体走势',
+          desc: '围巾与徽章的联动套装转化率最高。',
+        },
+      ],
+    },
+    // AI设计室
+    aiStudio: {
+      moodTags: ['霓虹赛博', '日式清新', '暗黑蒸汽', '怀旧像素', '梦幻少女'],
+      carriers: ['围巾', '帽子', '亚克力立牌', '徽章', '挂件', '手机壳'],
+      workflowSteps: [
+        {
+          title: '输入主题 + IP',
+          detail: '定义角色与世界观关键词，设定配色与构图。',
+        },
+        {
+          title: 'Gemini 生成与迁移',
+          detail: '一次生成多风格版本，并适配多个载体。',
+        },
+        {
+          title: '审核与发布',
+          detail: '确认版权与安全区，发布到推荐池。',
+        },
+      ],
+      form: {
+        labels: {
+          theme: '主题',
+          ipWorld: 'IP 世界',
+          prompt: '生成提示',
+          carriers: '目标载体',
+        },
+        placeholders: {
+          theme: '例如：星火骑士、霜月物语',
+          ipWorld: '例如：赛博朋克、魔法少女',
+          prompt: '描述你想要的图案风格和元素...',
+        },
+        btnGenerate: '开始生成',
+        btnSave: '保存草稿',
+      },
+      tasks: {
+        running: '生成中',
+        success: '已生成',
+        waiting: '待迁移',
+      },
+      preview: {
+        title: '生成预览',
+        noPreview: '尚未生成预览',
+      },
+      drafts: {
+        title: '草稿列表',
+        empty: '暂无草稿',
+      },
+    },
+  },
   auth: {
     // 登录页面
     login: {
@@ -71,6 +293,7 @@ export default {
           creator: '设计者',
           manufacturer: '制造商',
           buyer: '购买者',
+          admin: '管理员',
         },
         submitBtn: '进入谷子星图',
         registerBtn: '创建新账号',

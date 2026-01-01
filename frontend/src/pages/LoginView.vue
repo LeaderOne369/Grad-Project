@@ -36,6 +36,7 @@ const handleSubmit = async () => {
     if (result.user?.role === 'creator') router.push('/home/creator')
     if (result.user?.role === 'manufacturer') router.push('/home/manufacturer')
     if (result.user?.role === 'buyer') router.push('/home/buyer')
+    if (result.user?.role === 'admin') router.push('/admin')
   } catch (error) {
     errorMessage.value = (error as Error).message || t('auth.login.messages.loginFailed')
   }
@@ -110,6 +111,9 @@ const goRegister = () => {
               </button>
               <button type="button" class="inline-link" @click="fillAccount(2)">
                 {{ t('auth.login.form.roles.buyer') }}
+              </button>
+              <button type="button" class="inline-link" @click="fillAccount(3)">
+                {{ t('auth.login.form.roles.admin') }}
               </button>
             </div>
           </div>

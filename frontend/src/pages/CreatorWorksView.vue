@@ -1,51 +1,56 @@
 <script setup lang="ts">
-const works = [
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const works = computed(() => [
   {
-    title: '星火骑士 · 星云系列',
-    status: '已发布',
-    income: '¥1,240',
+    title: t('creator.works.worksList[0].title'),
+    status: t('creator.works.status.published'),
+    income: t('creator.works.worksList[0].income'),
     versions: 6,
   },
   {
-    title: '霜月物语 · 冰川旅人',
-    status: '审核中',
-    income: '¥860',
+    title: t('creator.works.worksList[1].title'),
+    status: t('creator.works.status.reviewing'),
+    income: t('creator.works.worksList[1].income'),
     versions: 4,
   },
   {
-    title: '夜航便利店 · 24h 霓虹',
-    status: '草稿',
-    income: '¥0',
+    title: t('creator.works.worksList[2].title'),
+    status: t('creator.works.status.draft'),
+    income: t('creator.works.worksList[2].income'),
     versions: 2,
   },
-]
+])
 
-const stats = [
-  { label: '本月收益', value: '¥3,420' },
-  { label: '发布作品', value: '12' },
-  { label: '授权通过', value: '9' },
-]
+const stats = computed(() => [
+  { label: t('creator.works.stats.labels[0]'), value: '¥3,420' },
+  { label: t('creator.works.stats.labels[1]'), value: '12' },
+  { label: t('creator.works.stats.labels[2]'), value: '9' },
+])
 </script>
 
 <template>
   <div class="detail-page detail-page--works">
     <header class="detail-hero">
       <div>
-        <p class="hero-tag">12 个项目</p>
-        <h1>我的作品池</h1>
-        <p class="hero-subtitle">管理设计版本、授权状态与收益分成。</p>
+        <p class="hero-tag">{{ t('creator.works.hero.tag') }}</p>
+        <h1>{{ t('creator.works.hero.title') }}</h1>
+        <p class="hero-subtitle">{{ t('creator.works.hero.subtitle') }}</p>
       </div>
       <div class="detail-hero-card">
-        <span>作品总览</span>
-        <strong>12</strong>
-        <p>创作进度与收益一目了然。</p>
-        <button class="primary-btn">新增作品</button>
+        <span>{{ t('creator.works.hero.cardTitle') }}</span>
+        <strong>{{ t('creator.works.hero.cardValue') }}</strong>
+        <p>{{ t('creator.works.hero.cardDesc') }}</p>
+        <button class="primary-btn">{{ t('creator.works.hero.btn') }}</button>
       </div>
     </header>
 
     <section class="detail-grid">
       <div class="detail-panel">
-        <h2>收益与授权</h2>
+        <h2>{{ t('creator.works.stats.title') }}</h2>
         <div class="panel-stats">
           <div v-for="item in stats" :key="item.label">
             <strong>{{ item.value }}</strong>
