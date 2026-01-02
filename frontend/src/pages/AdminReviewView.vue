@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getReviewItems, type ReviewItem } from '@/services/adminMock'
+
+const { t } = useI18n()
+
+// 辅助函数
+const getTypeLabel = (type: string) => typeLabels.value[type] || type
+const getRiskLabel = (risk: string) => riskLabels.value[risk] || risk
 
 const reviews = ref<ReviewItem[]>(getReviewItems())
 const filterType = ref<string>('all')
@@ -25,30 +32,30 @@ function rejectItem(item: ReviewItem) {
   item.status = 'rejected'
 }
 
-const typeLabels: Record<string, string> = {
-  design: '设计作品',
-  ai_generated: 'AI 生成',
-  comment: '用户评论',
-}
+const typeLabels = computed<Record<string, string>>(() => ({
+  design: t('admin.review.types.design'),
+  ai_generated: t('admin.review.types.ai_generated'),
+  comment: t('admin.review.types.comment'),
+}))
 
-const riskLabels: Record<string, string> = {
-  low: '低风险',
-  medium: '中风险',
-  high: '高风险',
-}
+const riskLabels = computed<Record<string, string>>(() => ({
+  low: t('admin.review.riskLevels.low'),
+  medium: t('admin.review.riskLevels.medium'),
+  high: t('admin.review.riskLevels.high'),
+}))
 </script>
 
 <template>
   <div class="admin-review">
     <header class="page-header">
       <div>
-        <h1>内容审核</h1>
-        <p>审核用户提交的设计作品、AI生成内容与评论</p>
+        <h1>{{ t('admin.review.hero.title') }}</h1>
+        <p>{{ t('admin.review.hero.subtitle') }}</p>
       </div>
       <div class="header-stats">
         <div class="mini-stat mini-stat--warning">
           <span class="mini-stat__value">{{ pendingCount }}</span>
-          <span class="mini-stat__label">待审核</span>
+          <span class="mini-stat__label">{{ t('admin.review.stats.pending') }}</span>
         </div>
         <div class="mini-stat mini-stat--danger">
           <span class="mini-stat__value">{{ highRiskCount }}</span>
@@ -67,7 +74,7 @@ const riskLabels: Record<string, string> = {
             :class="['filter-btn', { active: filterType === type }]"
             @click="filterType = type"
           >
-            {{ type === 'all' ? '全部' : typeLabels[type] }}
+            {{ type === 'all' ? t('admin.orders.filters.all') : getTypeLabel(type) }}
           </button>
         </div>
       </div>
@@ -81,7 +88,7 @@ const riskLabels: Record<string, string> = {
             :class="['filter-btn', `filter-btn--${risk}`, { active: filterRisk === risk }]"
             @click="filterRisk = risk"
           >
-            {{ risk === 'all' ? '全部' : riskLabels[risk] }}
+            {{ risk === 'all' ? t('admin.orders.filters.all') : getRiskLabel(risk) }}
           </button>
         </div>
       </div>
@@ -91,10 +98,10 @@ const riskLabels: Record<string, string> = {
       <div v-for="item in filteredReviews" :key="item.id" class="review-card">
         <div class="review-card__header">
           <span :class="['type-badge', `type-badge--${item.type}`]">
-            {{ typeLabels[item.type] }}
+            {{ getTypeLabel(item.type) }}
           </span>
           <span :class="['risk-badge', `risk-badge--${item.riskLevel}`]">
-            {{ riskLabels[item.riskLevel] }}
+            {{ getRiskLabel(item.riskLevel) }}
           </span>
         </div>
 
@@ -137,20 +144,20 @@ const riskLabels: Record<string, string> = {
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            通过
+            {{ t('admin.review.actions.approve') }}
           </button>
           <button class="btn-reject" @click="rejectItem(item)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
-            拒绝
+            {{ t('admin.review.actions.reject') }}
           </button>
         </div>
 
         <div v-else class="review-card__status">
           <span :class="['status-result', `status-result--${item.status}`]">
-            {{ item.status === 'approved' ? '已通过' : '已拒绝' }}
+            {{ item.status === 'approved' ? t('admin.review.status.approved') : t('admin.review.status.rejected') }}
           </span>
         </div>
       </div>
@@ -160,7 +167,7 @@ const riskLabels: Record<string, string> = {
       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <polyline points="20 6 9 17 4 12" />
       </svg>
-      <p>暂无待审核内容</p>
+      <p>{{ t('admin.review.empty.noPending') }}</p>
     </div>
   </div>
 </template>

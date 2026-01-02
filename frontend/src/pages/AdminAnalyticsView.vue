@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import * as echarts from 'echarts'
 import AMapLoader from '@amap/amap-jsapi-loader'
 import { getUserDistribution, getTrendData, getRoleDistribution } from '@/services/adminMock'
+
+const { t } = useI18n()
 
 const mapRef = ref<HTMLElement | null>(null)
 const conversionChartRef = ref<HTMLElement | null>(null)
@@ -193,15 +196,15 @@ onUnmounted(() => {
   <div class="admin-analytics">
     <header class="page-header">
       <div>
-        <h1>数据分析</h1>
-        <p>深度洞察用户行为与平台运营数据</p>
+        <h1>{{ t('admin.analytics.hero.title') }}</h1>
+        <p>{{ t('admin.analytics.hero.subtitle') }}</p>
       </div>
       <div class="header-actions">
         <select class="time-select">
-          <option>最近7天</option>
+          <option>{{ t('admin.analytics.timeRanges.last7days') }}</option>
           <option>最近14天</option>
-          <option selected>最近30天</option>
-          <option>最近90天</option>
+          <option selected>{{ t('admin.analytics.timeRanges.last30days') }}</option>
+          <option>{{ t('admin.analytics.timeRanges.last90days') }}</option>
         </select>
         <button class="btn-export">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -217,8 +220,8 @@ onUnmounted(() => {
     <section class="analytics-grid">
       <div class="map-card">
         <div class="card-header">
-          <h3>用户地域分布</h3>
-          <span class="total-badge">{{ totalUsers.toLocaleString() }} 用户</span>
+          <h3>{{ t('admin.analytics.charts.userDistribution') }}</h3>
+          <span class="total-badge">{{ totalUsers.toLocaleString() }} {{ t('admin.users.orderUnit') }}</span>
         </div>
         <div ref="mapRef" class="map-container">
           <div class="map-fallback">
@@ -244,17 +247,17 @@ onUnmounted(() => {
       </div>
 
       <div class="chart-card">
-        <h3>转化漏斗分析</h3>
+        <h3>{{ t('admin.analytics.charts.conversionFunnel') }}</h3>
         <div ref="conversionChartRef" class="chart-container"></div>
       </div>
 
       <div class="chart-card chart-card--small">
-        <h3>用户角色分布</h3>
+        <h3>{{ t('admin.analytics.charts.roleDistribution') }}</h3>
         <div ref="roleChartRef" class="chart-container"></div>
       </div>
 
       <div class="insights-card">
-        <h3>数据洞察</h3>
+        <h3>{{ t('admin.analytics.charts.insights') }}</h3>
         <div class="insights-list">
           <div class="insight-item insight-item--positive">
             <div class="insight-icon">
@@ -264,8 +267,8 @@ onUnmounted(() => {
               </svg>
             </div>
             <div class="insight-content">
-              <strong>用户增长强劲</strong>
-              <p>本月新增用户较上月增长 23.5%，深圳、广州地区增速最快</p>
+              <strong>{{ t('admin.analytics.insights.userGrowth') }}</strong>
+              <p>{{ t('admin.analytics.insights.userGrowthDesc') }}</p>
             </div>
           </div>
           <div class="insight-item insight-item--warning">
@@ -277,8 +280,8 @@ onUnmounted(() => {
               </svg>
             </div>
             <div class="insight-content">
-              <strong>转化率需优化</strong>
-              <p>加购到下单转化率 32%，建议优化结算流程</p>
+              <strong>{{ t('admin.analytics.insights.conversionRate') }}</strong>
+              <p>{{ t('admin.analytics.insights.conversionRateDesc') }}</p>
             </div>
           </div>
           <div class="insight-item insight-item--info">

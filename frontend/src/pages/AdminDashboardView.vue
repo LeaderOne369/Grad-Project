@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import * as echarts from 'echarts'
 import * as THREE from 'three'
 import {
@@ -10,6 +11,28 @@ import {
   getReviewItems,
   type DashboardStats,
 } from '@/services/adminMock'
+
+const { t } = useI18n()
+
+// 获取类型显示文本
+const getTypeText = (type: string) => {
+  const typeMap: Record<string, string> = {
+    'design': t('admin.dashboard.reviews.types.design'),
+    'ai_generated': t('admin.dashboard.reviews.types.ai_generated'),
+    'comment': t('admin.dashboard.reviews.types.comment'),
+  }
+  return typeMap[type] || type
+}
+
+// 获取风险等级文本
+const getRiskLevelText = (riskLevel: string) => {
+  const riskMap: Record<string, string> = {
+    'low': t('admin.dashboard.reviews.riskLevels.low'),
+    'medium': t('admin.dashboard.reviews.riskLevels.medium'),
+    'high': t('admin.dashboard.reviews.riskLevels.high'),
+  }
+  return riskMap[riskLevel] || riskLevel
+}
 
 const stats = ref<DashboardStats>(getDashboardStats())
 const pendingReviews = ref(getReviewItems().filter((r) => r.status === 'pending'))
@@ -45,7 +68,7 @@ function initTrendChart() {
       textStyle: { color: '#333' },
     },
     legend: {
-      data: ['新增用户', '订单数', 'AI调用'],
+      data: [t('admin.dashboard.chartLabels.newUsers'), t('admin.dashboard.chartLabels.orders'), t('admin.dashboard.chartLabels.aiCalls')],
       bottom: 0,
       textStyle: { color: '#666' },
     },
@@ -64,7 +87,7 @@ function initTrendChart() {
     },
     series: [
       {
-        name: '新增用户',
+        name: t('admin.dashboard.chartLabels.newUsers'),
         type: 'line',
         smooth: true,
         data: data.map((d) => d.users),
@@ -78,7 +101,7 @@ function initTrendChart() {
         },
       },
       {
-        name: '订单数',
+        name: t('admin.dashboard.chartLabels.orders'),
         type: 'line',
         smooth: true,
         data: data.map((d) => d.orders),
@@ -92,7 +115,7 @@ function initTrendChart() {
         },
       },
       {
-        name: 'AI调用',
+        name: t('admin.dashboard.chartLabels.aiCalls'),
         type: 'bar',
         data: data.map((d) => d.aiCalls),
         itemStyle: {
@@ -311,8 +334,8 @@ function formatNumber(num: number): string {
 
     <header class="admin-header">
       <div class="admin-header__content">
-        <h1>控制中心</h1>
-        <p>实时监控平台运营数据与系统状态</p>
+        <h1>{{ t('admin.dashboard.hero.title') }}</h1>
+        <p>{{ t('admin.dashboard.hero.subtitle') }}</p>
       </div>
       <div class="admin-header__time">
         {{
@@ -345,7 +368,7 @@ function formatNumber(num: number): string {
           </svg>
         </div>
         <div class="stat-card__content">
-          <span class="stat-card__label">总用户数</span>
+          <span class="stat-card__label">{{ t('admin.dashboard.stats.totalUsers') }}</span>
           <strong class="stat-card__value">{{ formatNumber(stats.totalUsers) }}</strong>
           <span class="stat-card__trend stat-card__trend--up">+12.5%</span>
         </div>
@@ -368,7 +391,7 @@ function formatNumber(num: number): string {
           </svg>
         </div>
         <div class="stat-card__content">
-          <span class="stat-card__label">订单总数</span>
+          <span class="stat-card__label">{{ t('admin.dashboard.stats.totalOrders') }}</span>
           <strong class="stat-card__value">{{ formatNumber(stats.totalOrders) }}</strong>
           <span class="stat-card__trend stat-card__trend--up">+8.3%</span>
         </div>
@@ -390,7 +413,7 @@ function formatNumber(num: number): string {
           </svg>
         </div>
         <div class="stat-card__content">
-          <span class="stat-card__label">总收入</span>
+          <span class="stat-card__label">{{ t('admin.dashboard.stats.totalRevenue') }}</span>
           <strong class="stat-card__value">¥{{ formatNumber(stats.totalRevenue) }}</strong>
           <span class="stat-card__trend stat-card__trend--up">+23.1%</span>
         </div>
@@ -413,7 +436,7 @@ function formatNumber(num: number): string {
           </svg>
         </div>
         <div class="stat-card__content">
-          <span class="stat-card__label">AI 调用</span>
+          <span class="stat-card__label">{{ t('admin.dashboard.stats.aiCalls') }}</span>
           <strong class="stat-card__value">{{ formatNumber(stats.aiCalls) }}</strong>
           <span class="stat-card__trend stat-card__trend--up">+45.2%</span>
         </div>
@@ -422,47 +445,41 @@ function formatNumber(num: number): string {
 
     <section class="charts-grid">
       <div class="chart-card chart-card--large">
-        <h3>数据趋势</h3>
+        <h3>{{ t('admin.dashboard.charts.trend') }}</h3>
         <div ref="trendChartRef" class="chart-container"></div>
       </div>
 
       <div class="chart-card">
-        <h3>载体分布</h3>
+        <h3>{{ t('admin.dashboard.charts.category') }}</h3>
         <div ref="categoryChartRef" class="chart-container"></div>
       </div>
 
       <div class="chart-card">
-        <h3>AI 功能使用</h3>
+        <h3>{{ t('admin.dashboard.charts.aiUsage') }}</h3>
         <div ref="roleChartRef" class="chart-container"></div>
       </div>
     </section>
 
     <section class="review-section">
       <div class="review-header">
-        <h3>待审核内容</h3>
+        <h3>{{ t('admin.dashboard.reviews.title') }}</h3>
         <span class="review-badge">{{ pendingReviews.length }}</span>
       </div>
       <div class="review-list">
         <div v-for="item in pendingReviews" :key="item.id" class="review-item">
           <div class="review-item__type" :class="`review-item__type--${item.type}`">
-            {{ item.type === 'design' ? '设计' : item.type === 'ai_generated' ? 'AI' : '评论' }}
+            {{ getTypeText(item.type) }}
           </div>
           <div class="review-item__content">
             <strong>{{ item.title }}</strong>
             <p>{{ item.creator }} · {{ item.submittedAt }}</p>
           </div>
           <div class="review-item__risk" :class="`review-item__risk--${item.riskLevel}`">
-            {{
-              item.riskLevel === 'low'
-                ? '低风险'
-                : item.riskLevel === 'medium'
-                  ? '中风险'
-                  : '高风险'
-            }}
+            {{ getRiskLevelText(item.riskLevel) }}
           </div>
           <div class="review-item__actions">
-            <button class="btn-approve">通过</button>
-            <button class="btn-reject">拒绝</button>
+            <button class="btn-approve">{{ t('admin.dashboard.reviews.actions.approve') }}</button>
+            <button class="btn-reject">{{ t('admin.dashboard.reviews.actions.reject') }}</button>
           </div>
         </div>
       </div>

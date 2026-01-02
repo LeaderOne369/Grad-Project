@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const settings = ref({
   // Recommendation settings
@@ -47,12 +50,12 @@ function resetSettings() {
   <div class="admin-settings">
     <header class="page-header">
       <div>
-        <h1>系统设置</h1>
-        <p>配置推荐算法、AI参数与系统行为</p>
+        <h1>{{ t('admin.settings.hero.title') }}</h1>
+        <p>{{ t('admin.settings.hero.subtitle') }}</p>
       </div>
       <div class="header-actions">
-        <button class="btn-secondary" @click="resetSettings">重置</button>
-        <button class="btn-primary" @click="saveSettings">保存设置</button>
+        <button class="btn-secondary" @click="resetSettings">{{ t('admin.settings.actions.reset') }}</button>
+        <button class="btn-primary" @click="saveSettings">{{ t('admin.settings.actions.save') }}</button>
       </div>
     </header>
 
@@ -66,16 +69,16 @@ function resetSettings() {
             </svg>
           </div>
           <div>
-            <h2>推荐系统</h2>
-            <p>配置推荐算法权重与行为</p>
+            <h2>{{ t('admin.settings.recommendation.title') }}</h2>
+            <p>{{ t('admin.settings.recommendation.subtitle') }}</p>
           </div>
         </div>
 
         <div class="settings-list">
           <div class="setting-item">
             <div class="setting-info">
-              <strong>启用推荐</strong>
-              <span>开启个性化推荐功能</span>
+              <strong>{{ t('admin.settings.recommendation.enable') }}</strong>
+              <span>{{ t('admin.settings.recommendation.enableDesc') }}</span>
             </div>
             <label class="toggle-switch">
               <input v-model="settings.recommendationEnabled" type="checkbox" />
@@ -85,8 +88,8 @@ function resetSettings() {
 
           <div class="setting-item">
             <div class="setting-info">
-              <strong>风格权重</strong>
-              <span>基于用户偏好风格的推荐权重</span>
+              <strong>{{ t('admin.settings.recommendation.styleWeight') }}</strong>
+              <span>{{ t('admin.settings.recommendation.styleWeightDesc') }}</span>
             </div>
             <div class="slider-input">
               <input v-model.number="settings.styleWeightFactor" type="range" min="0" max="1" step="0.05" />
@@ -96,8 +99,8 @@ function resetSettings() {
 
           <div class="setting-item">
             <div class="setting-info">
-              <strong>内容权重</strong>
-              <span>基于IP和主题的推荐权重</span>
+              <strong>{{ t('admin.settings.recommendation.contentWeight') }}</strong>
+              <span>{{ t('admin.settings.recommendation.contentWeightDesc') }}</span>
             </div>
             <div class="slider-input">
               <input v-model.number="settings.contentWeightFactor" type="range" min="0" max="1" step="0.05" />
@@ -107,8 +110,8 @@ function resetSettings() {
 
           <div class="setting-item">
             <div class="setting-info">
-              <strong>个性化权重</strong>
-              <span>基于用户行为的推荐权重</span>
+              <strong>{{ t('admin.settings.recommendation.personalWeight') }}</strong>
+              <span>{{ t('admin.settings.recommendation.personalWeightDesc') }}</span>
             </div>
             <div class="slider-input">
               <input v-model.number="settings.personalWeightFactor" type="range" min="0" max="1" step="0.05" />
@@ -128,16 +131,16 @@ function resetSettings() {
             </svg>
           </div>
           <div>
-            <h2>AI 配置</h2>
-            <p>管理 Gemini AI 调用参数</p>
+            <h2>{{ t('admin.settings.ai.title') }}</h2>
+            <p>{{ t('admin.settings.ai.subtitle') }}</p>
           </div>
         </div>
 
         <div class="settings-list">
           <div class="setting-item">
             <div class="setting-info">
-              <strong>启用 AI 功能</strong>
-              <span>开启文生图、图生图等功能</span>
+              <strong>{{ t('admin.settings.ai.enable') }}</strong>
+              <span>{{ t('admin.settings.ai.enableDesc') }}</span>
             </div>
             <label class="toggle-switch">
               <input v-model="settings.aiEnabled" type="checkbox" />
@@ -147,8 +150,8 @@ function resetSettings() {
 
           <div class="setting-item">
             <div class="setting-info">
-              <strong>每日限额</strong>
-              <span>单用户每日 AI 调用次数上限</span>
+              <strong>{{ t('admin.settings.ai.dailyLimit') }}</strong>
+              <span>{{ t('admin.settings.ai.dailyLimitDesc') }}</span>
             </div>
             <div class="number-input">
               <button @click="settings.aiDailyLimit = Math.max(0, settings.aiDailyLimit - 10)">-</button>
@@ -159,8 +162,8 @@ function resetSettings() {
 
           <div class="setting-item">
             <div class="setting-info">
-              <strong>队列超时</strong>
-              <span>AI 任务最大等待时间（秒）</span>
+              <strong>{{ t('admin.settings.ai.queueTimeout') }}</strong>
+              <span>{{ t('admin.settings.ai.queueTimeoutDesc') }}</span>
             </div>
             <div class="number-input">
               <button @click="settings.aiQueueTimeout = Math.max(10, settings.aiQueueTimeout - 10)">-</button>
@@ -179,16 +182,16 @@ function resetSettings() {
             </svg>
           </div>
           <div>
-            <h2>审核设置</h2>
-            <p>配置内容审核策略</p>
+            <h2>{{ t('admin.settings.review.title') }}</h2>
+            <p>{{ t('admin.settings.review.subtitle') }}</p>
           </div>
         </div>
 
         <div class="settings-list">
           <div class="setting-item">
             <div class="setting-info">
-              <strong>低风险自动通过</strong>
-              <span>自动批准低风险内容</span>
+              <strong>{{ t('admin.settings.review.autoLowRisk') }}</strong>
+              <span>{{ t('admin.settings.review.autoLowRiskDesc') }}</span>
             </div>
             <label class="toggle-switch">
               <input v-model="settings.autoReviewLowRisk" type="checkbox" />
@@ -198,8 +201,8 @@ function resetSettings() {
 
           <div class="setting-item">
             <div class="setting-info">
-              <strong>高风险人工审核</strong>
-              <span>高风险内容必须人工审核</span>
+              <strong>{{ t('admin.settings.review.manualHighRisk') }}</strong>
+              <span>{{ t('admin.settings.review.manualHighRiskDesc') }}</span>
             </div>
             <label class="toggle-switch">
               <input v-model="settings.requireManualHighRisk" type="checkbox" />
@@ -219,16 +222,16 @@ function resetSettings() {
             </svg>
           </div>
           <div>
-            <h2>系统维护</h2>
-            <p>管理系统运行状态</p>
+            <h2>{{ t('admin.settings.system.title') }}</h2>
+            <p>{{ t('admin.settings.system.subtitle') }}</p>
           </div>
         </div>
 
         <div class="settings-list">
           <div class="setting-item">
             <div class="setting-info">
-              <strong>维护模式</strong>
-              <span>暂停服务进行系统维护</span>
+              <strong>{{ t('admin.settings.system.maintenanceMode') }}</strong>
+              <span>{{ t('admin.settings.system.maintenanceModeDesc') }}</span>
             </div>
             <label class="toggle-switch toggle-switch--warning">
               <input v-model="settings.maintenanceMode" type="checkbox" />
@@ -238,8 +241,8 @@ function resetSettings() {
 
           <div class="setting-item">
             <div class="setting-info">
-              <strong>调试模式</strong>
-              <span>启用详细日志记录</span>
+              <strong>{{ t('admin.settings.system.debugMode') }}</strong>
+              <span>{{ t('admin.settings.system.debugModeDesc') }}</span>
             </div>
             <label class="toggle-switch">
               <input v-model="settings.debugMode" type="checkbox" />

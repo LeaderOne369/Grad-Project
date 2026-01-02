@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getOrders, type OrderData } from '@/services/adminMock'
+
+const { t } = useI18n()
+
+// 获取状态标签的函数
+const getStatusLabel = (status: string) => {
+  const labels = statusLabels.value
+  return labels?.[status] || status
+}
 
 const orders = ref<OrderData[]>(getOrders())
 const searchQuery = ref('')
@@ -19,13 +28,13 @@ const filteredOrders = computed(() => {
   })
 })
 
-const statusLabels: Record<string, string> = {
-  pending: '待处理',
-  processing: '生产中',
-  shipped: '已发货',
-  delivered: '已完成',
-  cancelled: '已取消',
-}
+const statusLabels = computed<Record<string, string>>(() => ({
+  pending: t('admin.orders.statuses.pending'),
+  processing: t('admin.orders.statuses.processing'),
+  shipped: t('admin.orders.statuses.shipped'),
+  delivered: t('admin.orders.statuses.delivered'),
+  cancelled: t('admin.orders.statuses.cancelled'),
+}))
 
 const statusColors: Record<string, string> = {
   pending: 'orange',
@@ -54,21 +63,21 @@ const processingCount = computed(() => orders.value.filter((o) => o.status === '
   <div class="admin-orders">
     <header class="page-header">
       <div>
-        <h1>订单管理</h1>
-        <p>追踪订单状态、处理售后与物流</p>
+        <h1>{{ t('admin.orders.hero.title') }}</h1>
+        <p>{{ t('admin.orders.hero.subtitle') }}</p>
       </div>
       <div class="header-stats">
         <div class="mini-stat">
           <span class="mini-stat__value">¥{{ totalRevenue.toLocaleString() }}</span>
-          <span class="mini-stat__label">总收入</span>
+          <span class="mini-stat__label">{{ t('admin.orders.stats.totalRevenue') }}</span>
         </div>
         <div class="mini-stat mini-stat--warning">
           <span class="mini-stat__value">{{ pendingCount }}</span>
-          <span class="mini-stat__label">待处理</span>
+          <span class="mini-stat__label">{{ t('admin.orders.stats.pending') }}</span>
         </div>
         <div class="mini-stat mini-stat--info">
           <span class="mini-stat__value">{{ processingCount }}</span>
-          <span class="mini-stat__label">生产中</span>
+          <span class="mini-stat__label">{{ t('admin.orders.stats.processing') }}</span>
         </div>
       </div>
     </header>
@@ -79,7 +88,7 @@ const processingCount = computed(() => orders.value.filter((o) => o.status === '
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
-        <input v-model="searchQuery" type="text" placeholder="搜索订单号、用户或商品..." />
+        <input v-model="searchQuery" type="text" :placeholder="t('admin.orders.filters.searchPlaceholder')" />
       </div>
 
       <div class="filter-tabs">
@@ -89,7 +98,7 @@ const processingCount = computed(() => orders.value.filter((o) => o.status === '
           :class="['filter-tab', { active: filterStatus === status }]"
           @click="filterStatus = status"
         >
-          {{ status === 'all' ? '全部' : statusLabels[status] }}
+          {{ status === 'all' ? t('admin.orders.filters.all') : getStatusLabel(status) }}
         </button>
       </div>
     </div>
@@ -119,19 +128,19 @@ const processingCount = computed(() => orders.value.filter((o) => o.status === '
 
         <div class="order-card__details">
           <div class="detail-row">
-            <span class="detail-label">购买者</span>
+            <span class="detail-label">{{ t('admin.orders.orderCard.buyer') }}</span>
             <span class="detail-value">{{ order.userName }}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">金额</span>
+            <span class="detail-label">{{ t('admin.orders.orderCard.amount') }}</span>
             <span class="detail-value detail-value--highlight">¥{{ order.amount }}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">创建时间</span>
+            <span class="detail-label">{{ t('admin.orders.orderCard.createdAt') }}</span>
             <span class="detail-value">{{ order.createdAt }}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">更新时间</span>
+            <span class="detail-label">{{ t('admin.orders.orderCard.updatedAt') }}</span>
             <span class="detail-value">{{ order.updatedAt }}</span>
           </div>
         </div>
@@ -143,13 +152,13 @@ const processingCount = computed(() => orders.value.filter((o) => o.status === '
             :value="order.status"
             @change="updateOrderStatus(order, ($event.target as HTMLSelectElement).value)"
           >
-            <option value="pending">待处理</option>
-            <option value="processing">生产中</option>
-            <option value="shipped">已发货</option>
-            <option value="delivered">已完成</option>
-            <option value="cancelled">已取消</option>
+            <option value="pending">{{ t('admin.orders.statuses.pending') }}</option>
+            <option value="processing">{{ t('admin.orders.statuses.processing') }}</option>
+            <option value="shipped">{{ t('admin.orders.statuses.shipped') }}</option>
+            <option value="delivered">{{ t('admin.orders.statuses.delivered') }}</option>
+            <option value="cancelled">{{ t('admin.orders.statuses.cancelled') }}</option>
           </select>
-          <button class="btn-detail">查看详情</button>
+          <button class="btn-detail">{{ t('admin.orders.orderCard.viewDetails') }}</button>
         </div>
       </div>
     </div>
@@ -160,7 +169,7 @@ const processingCount = computed(() => orders.value.filter((o) => o.status === '
         <line x1="12" y1="8" x2="12" y2="12" />
         <line x1="12" y1="16" x2="12.01" y2="16" />
       </svg>
-      <p>没有找到符合条件的订单</p>
+      <p>{{ t('admin.orders.empty.noOrdersDesc') }}</p>
     </div>
   </div>
 </template>

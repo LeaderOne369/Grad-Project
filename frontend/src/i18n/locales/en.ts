@@ -296,6 +296,302 @@ export default {
       },
     },
   },
+  admin: {
+    dashboard: {
+      hero: {
+        title: 'Control Center',
+        subtitle: 'Real-time monitoring of platform operation data and system status',
+      },
+      stats: {
+        totalUsers: 'Total Users',
+        totalOrders: 'Total Orders',
+        totalRevenue: 'Total Revenue',
+        aiCalls: 'AI Calls',
+        trend: 'Growth',
+      },
+      chartLabels: {
+        newUsers: 'New Users',
+        orders: 'Orders',
+        aiCalls: 'AI Calls',
+      },
+      charts: {
+        trend: 'Data Trends',
+        category: 'Carrier Distribution',
+        aiUsage: 'AI Function Usage',
+      },
+      reviews: {
+        title: 'Pending Reviews',
+        riskLevels: {
+          low: 'Low Risk',
+          medium: 'Medium Risk',
+          high: 'High Risk',
+        },
+        actions: {
+          approve: 'Approve',
+          reject: 'Reject',
+        },
+        types: {
+          design: 'Design',
+          ai_generated: 'AI',
+          comment: 'Comment',
+        },
+      },
+    },
+    users: {
+      hero: {
+        title: 'User Management',
+        subtitle: 'Manage platform user accounts, permissions and status',
+        addUser: 'Add User',
+      },
+      filters: {
+        searchPlaceholder: 'Search username, display name or email...',
+        allRoles: 'All Roles',
+        allStatuses: 'All Statuses',
+      },
+      table: {
+        headers: {
+          userInfo: 'User Info',
+          role: 'Role',
+          status: 'Status',
+          createdAt: 'Registered',
+          lastLogin: 'Last Login',
+          orders: 'Orders/Spending',
+          actions: 'Actions',
+        },
+      },
+      roles: {
+        buyer: 'Buyer',
+        creator: 'Creator',
+        manufacturer: 'Manufacturer',
+      },
+      statuses: {
+        active: 'Active',
+        banned: 'Banned',
+        pending: 'Pending',
+      },
+      actions: {
+        view: 'View Details',
+        edit: 'Edit',
+        ban: 'Ban',
+        unban: 'Unban',
+      },
+      pagination: {
+        showing: 'Showing',
+        results: 'results',
+        previous: 'Previous',
+        next: 'Next',
+      },
+      orderUnit: 'orders',
+    },
+    orders: {
+      hero: {
+        title: 'Order Management',
+        subtitle: 'Track order status, handle after-sales and logistics',
+      },
+      stats: {
+        totalRevenue: 'Total Revenue',
+        pending: 'Pending',
+        processing: 'Processing',
+      },
+      filters: {
+        searchPlaceholder: 'Search order ID, user or product...',
+        all: 'All',
+      },
+      statuses: {
+        pending: 'Pending',
+        processing: 'Processing',
+        shipped: 'Shipped',
+        delivered: 'Delivered',
+        cancelled: 'Cancelled',
+      },
+      table: {
+        headers: {
+          orderId: 'Order ID',
+          customer: 'Customer',
+          product: 'Product',
+          quantity: 'Quantity',
+          status: 'Status',
+          createdAt: 'Order Date',
+          actions: 'Actions',
+        },
+      },
+      actions: {
+        view: 'View Details',
+        track: 'Track Shipment',
+        refund: 'Refund',
+        contact: 'Contact Customer',
+      },
+      empty: {
+        noOrders: 'No Orders',
+        noOrdersDesc: 'No orders match the current filters',
+      },
+      orderCard: {
+        buyer: 'Buyer',
+        amount: 'Amount',
+        createdAt: 'Created',
+        updatedAt: 'Updated',
+        viewDetails: 'View Details',
+      },
+    },
+    sidebar: {
+      nav: {
+        dashboard: 'Control Center',
+        users: 'User Management',
+        orders: 'Order Management',
+        review: 'Content Review',
+        analytics: 'Data Analytics',
+        settings: 'System Settings',
+      },
+      brand: {
+        role: 'Admin Panel',
+      },
+      profile: {
+        name: 'System Admin',
+        role: 'Administrator',
+      },
+      logout: 'Logout',
+      about: 'About',
+      settings: 'Settings',
+    },
+    review: {
+      hero: {
+        title: 'Content Review',
+        subtitle: 'Review user-submitted designs, AI-generated content and comments',
+      },
+      stats: {
+        pending: 'Pending Review',
+      },
+      actions: {
+        approve: 'Approve',
+        reject: 'Reject',
+      },
+      status: {
+        approved: 'Approved',
+        rejected: 'Rejected',
+      },
+      empty: {
+        noPending: 'No pending content to review',
+      },
+      types: {
+        design: 'Design',
+        ai_generated: 'AI Generated',
+        comment: 'Comment',
+      },
+      riskLevels: {
+        low: 'Low Risk',
+        medium: 'Medium Risk',
+        high: 'High Risk',
+      },
+    },
+    analytics: {
+      hero: {
+        title: 'Data Analytics',
+        subtitle: 'Deep analysis of platform operations data and user behavior',
+      },
+      charts: {
+        userGrowth: 'User Growth Trend',
+        revenue: 'Revenue Analysis',
+        engagement: 'User Engagement',
+        topProducts: 'Top Products',
+        userDistribution: 'User Geographic Distribution',
+        conversionFunnel: 'Conversion Funnel Analysis',
+        roleDistribution: 'User Role Distribution',
+        insights: 'Data Insights',
+      },
+      metrics: {
+        totalUsers: 'Total Users',
+        activeUsers: 'Active Users',
+        totalRevenue: 'Total Revenue',
+        conversionRate: 'Conversion Rate',
+      },
+      timeRanges: {
+        last7days: 'Last 7 days',
+        last30days: 'Last 30 days',
+        last90days: 'Last 90 days',
+        lastYear: 'Last year',
+      },
+      insights: {
+        userGrowth: 'Strong User Growth',
+        userGrowthDesc: 'New users this month increased by 23.5% compared to last month, with fastest growth in Shenzhen and Guangzhou',
+        conversionRate: 'Conversion Rate Needs Optimization',
+        conversionRateDesc: 'Add-to-cart to order conversion rate is 32%, consider optimizing checkout process',
+      },
+    },
+    settings: {
+      hero: {
+        title: 'System Settings',
+        subtitle: 'Configure platform system parameters and feature toggles',
+      },
+      sections: {
+        general: 'General Settings',
+        security: 'Security Settings',
+        notifications: 'Notification Settings',
+        integrations: 'Third-party Integrations',
+      },
+      general: {
+        siteName: 'Site Name',
+        siteDescription: 'Site Description',
+        contactEmail: 'Contact Email',
+        timezone: 'Timezone',
+        language: 'Default Language',
+      },
+      security: {
+        passwordPolicy: 'Password Policy',
+        sessionTimeout: 'Session Timeout',
+        twoFactorAuth: 'Two-Factor Authentication',
+        ipWhitelist: 'IP Whitelist',
+      },
+      notifications: {
+        emailNotifications: 'Email Notifications',
+        pushNotifications: 'Push Notifications',
+        systemAlerts: 'System Alerts',
+        userMessages: 'User Messages',
+      },
+      actions: {
+        save: 'Save Settings',
+        reset: 'Reset',
+        test: 'Test',
+      },
+      recommendation: {
+        title: 'Recommendation System',
+        subtitle: 'Configure recommendation algorithm weights and behavior',
+        enable: 'Enable Recommendations',
+        enableDesc: 'Enable personalized recommendation features',
+        styleWeight: 'Style Weight',
+        styleWeightDesc: 'Recommendation weight based on user preferred styles',
+        contentWeight: 'Content Weight',
+        contentWeightDesc: 'Recommendation weight based on IP and themes',
+        personalWeight: 'Personalization Weight',
+        personalWeightDesc: 'Recommendation weight based on user behavior',
+      },
+      ai: {
+        title: 'AI Configuration',
+        subtitle: 'Manage Gemini AI call parameters',
+        enable: 'Enable AI Features',
+        enableDesc: 'Enable text-to-image, image-to-image and other AI features',
+        dailyLimit: 'Daily Limit',
+        dailyLimitDesc: 'Maximum daily AI calls per user',
+        queueTimeout: 'Queue Timeout',
+        queueTimeoutDesc: 'Maximum wait time for AI tasks (seconds)',
+      },
+      review: {
+        title: 'Review Settings',
+        subtitle: 'Configure content review policies',
+        autoLowRisk: 'Auto-approve Low Risk',
+        autoLowRiskDesc: 'Automatically approve low-risk content',
+        manualHighRisk: 'Manual Review High Risk',
+        manualHighRiskDesc: 'High-risk content requires manual review',
+      },
+      system: {
+        title: 'System Maintenance',
+        subtitle: 'Manage system operation status',
+        maintenanceMode: 'Maintenance Mode',
+        maintenanceModeDesc: 'Pause service for system maintenance',
+        debugMode: 'Debug Mode',
+        debugModeDesc: 'Enable detailed logging',
+      },
+    },
+  },
   community: {
     title: 'GOZU Community',
     subtitle: 'Creativity Gathers, Inspiration Unlimited',

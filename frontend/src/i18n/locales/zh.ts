@@ -291,6 +291,302 @@ export default {
       },
     },
   },
+  admin: {
+    dashboard: {
+      hero: {
+        title: '控制中心',
+        subtitle: '实时监控平台运营数据与系统状态',
+      },
+      stats: {
+        totalUsers: '总用户数',
+        totalOrders: '订单总数',
+        totalRevenue: '总收入',
+        aiCalls: 'AI 调用',
+        trend: '增长',
+      },
+      chartLabels: {
+        newUsers: '新增用户',
+        orders: '订单数',
+        aiCalls: 'AI调用',
+      },
+      charts: {
+        trend: '数据趋势',
+        category: '载体分布',
+        aiUsage: 'AI 功能使用',
+      },
+      reviews: {
+        title: '待审核内容',
+        riskLevels: {
+          low: '低风险',
+          medium: '中风险',
+          high: '高风险',
+        },
+        actions: {
+          approve: '通过',
+          reject: '拒绝',
+        },
+        types: {
+          design: '设计',
+          ai_generated: 'AI',
+          comment: '评论',
+        },
+      },
+    },
+    users: {
+      hero: {
+        title: '用户管理',
+        subtitle: '管理平台用户账号、权限与状态',
+        addUser: '添加用户',
+      },
+      filters: {
+        searchPlaceholder: '搜索用户名、昵称或邮箱...',
+        allRoles: '全部角色',
+        allStatuses: '全部状态',
+      },
+      table: {
+        headers: {
+          userInfo: '用户信息',
+          role: '角色',
+          status: '状态',
+          createdAt: '注册时间',
+          lastLogin: '最后登录',
+          orders: '订单/消费',
+          actions: '操作',
+        },
+      },
+      roles: {
+        buyer: '购买者',
+        creator: '设计者',
+        manufacturer: '制造商',
+      },
+      statuses: {
+        active: '正常',
+        banned: '已封禁',
+        pending: '待审核',
+      },
+      actions: {
+        view: '查看详情',
+        edit: '编辑',
+        ban: '封禁',
+        unban: '解封',
+      },
+      pagination: {
+        showing: '显示',
+        results: '条结果',
+        previous: '上一页',
+        next: '下一页',
+      },
+      orderUnit: '单',
+    },
+    orders: {
+      hero: {
+        title: '订单管理',
+        subtitle: '追踪订单状态、处理售后与物流',
+      },
+      stats: {
+        totalRevenue: '总收入',
+        pending: '待处理',
+        processing: '生产中',
+      },
+      filters: {
+        searchPlaceholder: '搜索订单号、用户或商品...',
+        all: '全部',
+      },
+      statuses: {
+        pending: '待处理',
+        processing: '生产中',
+        shipped: '已发货',
+        delivered: '已交付',
+        cancelled: '已取消',
+      },
+      table: {
+        headers: {
+          orderId: '订单号',
+          customer: '客户',
+          product: '商品',
+          quantity: '数量',
+          status: '状态',
+          createdAt: '下单时间',
+          actions: '操作',
+        },
+      },
+      actions: {
+        view: '查看详情',
+        track: '物流追踪',
+        refund: '退款',
+        contact: '联系客户',
+      },
+      empty: {
+        noOrders: '暂无订单',
+        noOrdersDesc: '当前没有符合条件的订单',
+      },
+      orderCard: {
+        buyer: '购买者',
+        amount: '金额',
+        createdAt: '创建时间',
+        updatedAt: '更新时间',
+        viewDetails: '查看详情',
+      },
+    },
+    sidebar: {
+      nav: {
+        dashboard: '控制中心',
+        users: '用户管理',
+        orders: '订单管理',
+        review: '内容审核',
+        analytics: '数据分析',
+        settings: '系统设置',
+      },
+      brand: {
+        role: '管理后台',
+      },
+      profile: {
+        name: '系统管理员',
+        role: 'Administrator',
+      },
+      logout: '退出登录',
+      about: '关于',
+      settings: '设置',
+    },
+    review: {
+      hero: {
+        title: '内容审核',
+        subtitle: '审核用户提交的设计作品、AI生成内容与评论',
+      },
+      stats: {
+        pending: '待审核',
+      },
+      actions: {
+        approve: '通过',
+        reject: '拒绝',
+      },
+      status: {
+        approved: '已通过',
+        rejected: '已拒绝',
+      },
+      empty: {
+        noPending: '暂无待审核内容',
+      },
+      types: {
+        design: '设计作品',
+        ai_generated: 'AI生成',
+        comment: '评论',
+      },
+      riskLevels: {
+        low: '低风险',
+        medium: '中风险',
+        high: '高风险',
+      },
+    },
+    analytics: {
+      hero: {
+        title: '数据分析',
+        subtitle: '深入分析平台运营数据与用户行为',
+      },
+      charts: {
+        userGrowth: '用户增长趋势',
+        revenue: '收入分析',
+        engagement: '用户活跃度',
+        topProducts: '热门商品',
+        userDistribution: '用户地域分布',
+        conversionFunnel: '转化漏斗分析',
+        roleDistribution: '用户角色分布',
+        insights: '数据洞察',
+      },
+      metrics: {
+        totalUsers: '总用户数',
+        activeUsers: '活跃用户',
+        totalRevenue: '总收入',
+        conversionRate: '转化率',
+      },
+      timeRanges: {
+        last7days: '最近7天',
+        last30days: '最近30天',
+        last90days: '最近90天',
+        lastYear: '最近一年',
+      },
+      insights: {
+        userGrowth: '用户增长强劲',
+        userGrowthDesc: '本月新增用户较上月增长 23.5%，深圳、广州地区增速最快',
+        conversionRate: '转化率需优化',
+        conversionRateDesc: '加购到下单转化率 32%，建议优化结算流程',
+      },
+    },
+    settings: {
+      hero: {
+        title: '系统设置',
+        subtitle: '配置平台系统参数与功能开关',
+      },
+      sections: {
+        general: '通用设置',
+        security: '安全设置',
+        notifications: '通知设置',
+        integrations: '第三方集成',
+      },
+      general: {
+        siteName: '站点名称',
+        siteDescription: '站点描述',
+        contactEmail: '联系邮箱',
+        timezone: '时区',
+        language: '默认语言',
+      },
+      security: {
+        passwordPolicy: '密码策略',
+        sessionTimeout: '会话超时',
+        twoFactorAuth: '双因子认证',
+        ipWhitelist: 'IP白名单',
+      },
+      notifications: {
+        emailNotifications: '邮件通知',
+        pushNotifications: '推送通知',
+        systemAlerts: '系统警报',
+        userMessages: '用户消息',
+      },
+      actions: {
+        save: '保存设置',
+        reset: '重置',
+        test: '测试',
+      },
+      recommendation: {
+        title: '推荐系统',
+        subtitle: '配置推荐算法权重与行为',
+        enable: '启用推荐',
+        enableDesc: '开启个性化推荐功能',
+        styleWeight: '风格权重',
+        styleWeightDesc: '基于用户偏好风格的推荐权重',
+        contentWeight: '内容权重',
+        contentWeightDesc: '基于IP和主题的推荐权重',
+        personalWeight: '个性化权重',
+        personalWeightDesc: '基于用户行为的推荐权重',
+      },
+      ai: {
+        title: 'AI 配置',
+        subtitle: '管理 Gemini AI 调用参数',
+        enable: '启用 AI 功能',
+        enableDesc: '开启文生图、图生图等功能',
+        dailyLimit: '每日限额',
+        dailyLimitDesc: '单用户每日 AI 调用次数上限',
+        queueTimeout: '队列超时',
+        queueTimeoutDesc: 'AI 任务最大等待时间（秒）',
+      },
+      review: {
+        title: '审核设置',
+        subtitle: '配置内容审核策略',
+        autoLowRisk: '自动审核低风险',
+        autoLowRiskDesc: '低风险内容自动通过审核',
+        manualHighRisk: '高风险人工审核',
+        manualHighRiskDesc: '高风险内容必须人工审核',
+      },
+      system: {
+        title: '系统维护',
+        subtitle: '管理系统运行状态',
+        maintenanceMode: '维护模式',
+        maintenanceModeDesc: '暂停服务进行系统维护',
+        debugMode: '调试模式',
+        debugModeDesc: '启用详细日志记录',
+      },
+    },
+  },
   community: {
     title: 'GOZU 社区',
     subtitle: '创意汇聚，灵感无限',

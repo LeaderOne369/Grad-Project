@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getUsers, type UserData } from '@/services/adminMock'
+
+const { t } = useI18n()
 
 const users = ref<UserData[]>(getUsers())
 const searchQuery = ref('')
@@ -21,17 +24,18 @@ const filteredUsers = computed(() => {
   })
 })
 
-const roleLabels: Record<string, string> = {
-  buyer: '购买者',
-  creator: '设计者',
-  manufacturer: '制造商',
-}
+// 使用计算属性从i18n获取标签
+const roleLabels = computed(() => ({
+  buyer: t('admin.users.roles.buyer'),
+  creator: t('admin.users.roles.creator'),
+  manufacturer: t('admin.users.roles.manufacturer'),
+}))
 
-const statusLabels: Record<string, string> = {
-  active: '正常',
-  banned: '已封禁',
-  pending: '待审核',
-}
+const statusLabels = computed(() => ({
+  active: t('admin.users.statuses.active'),
+  banned: t('admin.users.statuses.banned'),
+  pending: t('admin.users.statuses.pending'),
+}))
 
 function toggleUserStatus(user: UserData) {
   user.status = user.status === 'active' ? 'banned' : 'active'
@@ -42,15 +46,15 @@ function toggleUserStatus(user: UserData) {
   <div class="admin-users">
     <header class="page-header">
       <div>
-        <h1>用户管理</h1>
-        <p>管理平台用户账号、权限与状态</p>
+        <h1>{{ t('admin.users.hero.title') }}</h1>
+        <p>{{ t('admin.users.hero.subtitle') }}</p>
       </div>
       <button class="btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="12" y1="5" x2="12" y2="19" />
           <line x1="5" y1="12" x2="19" y2="12" />
         </svg>
-        添加用户
+        {{ t('admin.users.hero.addUser') }}
       </button>
     </header>
 
@@ -60,22 +64,22 @@ function toggleUserStatus(user: UserData) {
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
-        <input v-model="searchQuery" type="text" placeholder="搜索用户名、昵称或邮箱..." />
+        <input v-model="searchQuery" type="text" :placeholder="t('admin.users.filters.searchPlaceholder')" />
       </div>
 
       <div class="filter-group">
         <select v-model="filterRole" class="filter-select">
-          <option value="all">全部角色</option>
-          <option value="buyer">购买者</option>
-          <option value="creator">设计者</option>
-          <option value="manufacturer">制造商</option>
+          <option value="all">{{ t('admin.users.filters.allRoles') }}</option>
+          <option value="buyer">{{ t('admin.users.roles.buyer') }}</option>
+          <option value="creator">{{ t('admin.users.roles.creator') }}</option>
+          <option value="manufacturer">{{ t('admin.users.roles.manufacturer') }}</option>
         </select>
 
         <select v-model="filterStatus" class="filter-select">
-          <option value="all">全部状态</option>
-          <option value="active">正常</option>
-          <option value="banned">已封禁</option>
-          <option value="pending">待审核</option>
+          <option value="all">{{ t('admin.users.filters.allStatuses') }}</option>
+          <option value="active">{{ t('admin.users.statuses.active') }}</option>
+          <option value="banned">{{ t('admin.users.statuses.banned') }}</option>
+          <option value="pending">{{ t('admin.users.statuses.pending') }}</option>
         </select>
       </div>
     </div>
@@ -84,13 +88,13 @@ function toggleUserStatus(user: UserData) {
       <table class="users-table">
         <thead>
           <tr>
-            <th>用户信息</th>
-            <th>角色</th>
-            <th>状态</th>
-            <th>注册时间</th>
-            <th>最后登录</th>
-            <th>订单/消费</th>
-            <th>操作</th>
+            <th>{{ t('admin.users.table.headers.userInfo') }}</th>
+            <th>{{ t('admin.users.table.headers.role') }}</th>
+            <th>{{ t('admin.users.table.headers.status') }}</th>
+            <th>{{ t('admin.users.table.headers.createdAt') }}</th>
+            <th>{{ t('admin.users.table.headers.lastLogin') }}</th>
+            <th>{{ t('admin.users.table.headers.orders') }}</th>
+            <th>{{ t('admin.users.table.headers.actions') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -119,19 +123,19 @@ function toggleUserStatus(user: UserData) {
             <td>{{ user.lastLogin }}</td>
             <td>
               <div class="order-stats">
-                <span>{{ user.ordersCount }} 单</span>
+                <span>{{ user.ordersCount }} {{ t('admin.users.orderUnit') }}</span>
                 <span v-if="user.role === 'buyer'">¥{{ user.totalSpent.toLocaleString() }}</span>
               </div>
             </td>
             <td>
               <div class="action-buttons">
-                <button class="action-btn action-btn--view" title="查看详情">
+                <button class="action-btn action-btn--view" :title="t('admin.users.actions.view')">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                     <circle cx="12" cy="12" r="3" />
                   </svg>
                 </button>
-                <button class="action-btn action-btn--edit" title="编辑">
+                <button class="action-btn action-btn--edit" :title="t('admin.users.actions.edit')">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
@@ -140,7 +144,7 @@ function toggleUserStatus(user: UserData) {
                 <button
                   class="action-btn"
                   :class="user.status === 'banned' ? 'action-btn--unlock' : 'action-btn--ban'"
-                  :title="user.status === 'banned' ? '解封' : '封禁'"
+                  :title="user.status === 'banned' ? t('admin.users.actions.unban') : t('admin.users.actions.ban')"
                   @click="toggleUserStatus(user)"
                 >
                   <svg v-if="user.status === 'banned'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -160,13 +164,13 @@ function toggleUserStatus(user: UserData) {
     </div>
 
     <div class="pagination">
-      <span class="pagination-info">显示 {{ filteredUsers.length }} 条结果</span>
+      <span class="pagination-info">{{ t('admin.users.pagination.showing') }} {{ filteredUsers.length }} {{ t('admin.users.pagination.results') }}</span>
       <div class="pagination-buttons">
-        <button class="pagination-btn" disabled>上一页</button>
+        <button class="pagination-btn" disabled>{{ t('admin.users.pagination.previous') }}</button>
         <button class="pagination-btn pagination-btn--active">1</button>
         <button class="pagination-btn">2</button>
         <button class="pagination-btn">3</button>
-        <button class="pagination-btn">下一页</button>
+        <button class="pagination-btn">{{ t('admin.users.pagination.next') }}</button>
       </div>
     </div>
   </div>
