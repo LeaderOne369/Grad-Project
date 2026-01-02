@@ -34,6 +34,9 @@ const route = useRoute()
 const showSettings = ref(false)
 const showAbout = ref(false)
 
+// 记住上次访问的角色，用于社区等共享页面
+const lastRole = ref(localStorage.getItem('gozu_last_role') || 'buyer')
+
 const role = computed(() => {
   const path = route.path
   if (
@@ -41,13 +44,20 @@ const role = computed(() => {
     path.startsWith('/creator') ||
     path.startsWith('/ai-studio')
   ) {
+    localStorage.setItem('gozu_last_role', 'creator')
     return 'creator'
   }
   if (path.startsWith('/home/manufacturer') || path.startsWith('/manufacturer')) {
+    localStorage.setItem('gozu_last_role', 'manufacturer')
     return 'manufacturer'
   }
   if (path.startsWith('/home/buyer') || path.startsWith('/buyer')) {
+    localStorage.setItem('gozu_last_role', 'buyer')
     return 'buyer'
+  }
+  // 社区等共享页面使用上次记录的角色
+  if (path.startsWith('/community')) {
+    return lastRole.value as 'creator' | 'manufacturer' | 'buyer'
   }
   return 'guest'
 })
@@ -66,23 +76,26 @@ const navItems = computed(() => {
   switch (role.value) {
     case 'creator':
       return [
-        { label: '设计者主页', to: '/home/creator' },
-        { label: 'AI 设计室', to: '/ai-studio' },
-        { label: '灵感实验室', to: '/creator/ai-lab' },
-        { label: '作品池', to: '/creator/works' },
-        { label: '趋势榜', to: '/creator/trends' },
+        { label: t('nav.creator.home'), to: '/home/creator' },
+        { label: t('nav.creator.aiStudio'), to: '/ai-studio' },
+        { label: t('nav.creator.aiLab'), to: '/creator/ai-lab' },
+        { label: t('nav.creator.works'), to: '/creator/works' },
+        { label: t('nav.creator.trends'), to: '/creator/trends' },
+        { label: t('nav.creator.community'), to: '/community' },
       ]
     case 'manufacturer':
       return [
-        { label: '制造商主页', to: '/home/manufacturer' },
-        { label: '订单看板', to: '/manufacturer/orders' },
-        { label: '工艺模板', to: '/manufacturer/templates' },
+        { label: t('nav.manufacturer.home'), to: '/home/manufacturer' },
+        { label: t('nav.manufacturer.orders'), to: '/manufacturer/orders' },
+        { label: t('nav.manufacturer.templates'), to: '/manufacturer/templates' },
+        { label: t('nav.manufacturer.community'), to: '/community' },
       ]
     case 'buyer':
       return [
-        { label: '推荐首页', to: '/home/buyer' },
-        { label: '开启定制', to: '/buyer/customize/upload' },
-        { label: '我的订单', to: '/buyer/orders' },
+        { label: t('nav.buyer.home'), to: '/home/buyer' },
+        { label: t('nav.buyer.customize'), to: '/buyer/customize/upload' },
+        { label: t('nav.buyer.orders'), to: '/buyer/orders' },
+        { label: t('nav.buyer.community'), to: '/community' },
       ]
     default:
       return []
@@ -159,9 +172,7 @@ const closeAbout = () => {
         </div>
         <div class="role-nav__actions">
           <div v-if="!isGuestPage" class="role-nav__meta">
-            <span v-if="role === 'creator'">设计者模式</span>
-            <span v-else-if="role === 'manufacturer'">制造商模式</span>
-            <span v-else-if="role === 'buyer'">购买者模式</span>
+            <span>{{ t(`nav.roles.${role}`) }}</span>
           </div>
           <button class="settings-btn" @click="toggleAbout" :aria-label="t('common.about')">
             <svg

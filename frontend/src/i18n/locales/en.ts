@@ -35,6 +35,40 @@ export default {
     about: 'About',
     settings: 'Settings',
   },
+  nav: {
+    creator: {
+      home: 'Designer Home',
+      aiStudio: 'AI Design Studio',
+      aiLab: 'Inspiration Lab',
+      works: 'Works Pool',
+      trends: 'Trends',
+      community: 'Community',
+    },
+    manufacturer: {
+      home: 'Manufacturer Home',
+      orders: 'Orders Dashboard',
+      templates: 'Process Templates',
+      community: 'Community',
+    },
+    buyer: {
+      home: 'Recommendation Home',
+      customize: 'Start Customization',
+      orders: 'My Orders',
+      community: 'Community',
+    },
+    roles: {
+      creator: 'Designer Mode',
+      manufacturer: 'Manufacturer Mode',
+      buyer: 'Buyer Mode',
+    },
+  },
+  footer: {
+    copyright: 'Copyright © 2026 Lixing Xu. All rights reserved.',
+    university: 'School of Software Engineering, Hefei University of Technology Graduation Project',
+  },
+  app: {
+    title: 'GOZU - Anime Creative Platform',
+  },
   creator: {
     // 主页
     home: {
@@ -260,6 +294,113 @@ export default {
         title: 'Draft List',
         empty: 'No drafts',
       },
+    },
+  },
+  community: {
+    title: 'GOZU Community',
+    subtitle: 'Creativity Gathers, Inspiration Unlimited',
+    description: 'A platform for designers, manufacturers and buyers to communicate together. Share design experiences, discuss process technologies, and discover creative inspirations.',
+    stats: {
+      users: 'Active Users',
+      posts: 'Great Posts',
+      interactions: 'Interactions',
+    },
+    createPost: 'Create Post',
+    search: {
+      placeholder: 'Search posts, tags, authors...',
+    },
+    sort: {
+      latest: 'Latest',
+      hot: 'Hot',
+      mostLiked: 'Most Liked',
+    },
+    categories: {
+      title: 'Categories',
+      all: 'All',
+      design: 'Design Share',
+      tutorial: 'Tutorials',
+      showcase: 'Showcase',
+      question: 'Q&A',
+      trading: 'Trading',
+      chat: 'Chat',
+    },
+    actions: {
+      like: 'Like',
+      liked: 'Liked',
+      collect: 'Collect',
+      collected: 'Collected',
+      comment: 'Comment',
+      share: 'Share',
+      follow: 'Follow',
+      following: 'Following',
+    },
+    create: {
+      title: 'Create New Post',
+      back: 'Back to Community',
+      cancel: 'Cancel',
+      publish: 'Publish',
+      form: {
+        title: {
+          label: 'Post Title',
+          placeholder: 'Create an attractive title (at least 5 characters)',
+        },
+        summary: {
+          label: 'Content Summary',
+          placeholder: 'Briefly describe the content, will be displayed on the list page (at least 10 characters)',
+        },
+        content: {
+          label: 'Post Content',
+        },
+        category: {
+          label: 'Select Category',
+        },
+        tags: {
+          label: 'Add Tags',
+          placeholder: 'Enter tag and press Enter to add',
+          add: 'Add',
+          hint: 'Up to 5 tags',
+        },
+      },
+      tips: {
+        title: 'Posting Tips',
+        items: [
+          'Title should be concise and highlight the topic',
+          'Summary for list display, summarize core content',
+          'Add appropriate tags to increase exposure',
+          'Rich text and images get more interactions',
+        ],
+      },
+    },
+    post: {
+      back: 'Back to Community',
+      author: 'Author',
+      time: 'Posted on',
+      views: 'Views',
+      comments: 'Comments',
+      reply: 'Reply',
+      replyTo: 'Reply to',
+      replyPlaceholder: 'Share your thoughts...',
+      replyToPlaceholder: 'Reply to @{author}...',
+      submitComment: 'Post Comment',
+      noComments: 'No comments yet, be the first to comment!',
+    },
+    empty: {
+      noPosts: 'No related posts',
+      noPostsDesc: 'Try a different category or keyword, or be the first to post!',
+      createFirst: 'Create First Post',
+      loading: 'Loading...',
+      notFound: 'Post not found',
+      notFoundDesc: 'This post may have been deleted or the link is invalid',
+      backHome: 'Back to Community',
+    },
+    hot: {
+      posts: 'Hot Recommendations',
+      tags: 'Hot Tags',
+    },
+    promo: {
+      title: 'Become a Premium Creator',
+      desc: 'Publish original content to get more exposure and exclusive badges',
+      button: 'Learn More',
     },
   },
   auth: {

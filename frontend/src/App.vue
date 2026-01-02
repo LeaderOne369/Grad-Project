@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { usePageTitle } from '@/composables/usePageTitle'
 import RoleNav from '@/components/RoleNav.vue'
+
+const { t } = useI18n()
+
+// 使用页面标题组合式函数
+usePageTitle()
 </script>
 
 <template>
@@ -9,8 +16,8 @@ import RoleNav from '@/components/RoleNav.vue'
     <RouterView />
     <footer class="site-footer">
       <div class="site-footer__inner">
-        <p>Copyright © 2026 徐力行. All rights reserved.</p>
-        <p>合肥工业大学软件学院毕业设计项目</p>
+        <p>{{ t('footer.copyright') }}</p>
+        <p>{{ t('footer.university') }}</p>
       </div>
     </footer>
   </div>

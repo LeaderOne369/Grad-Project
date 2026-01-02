@@ -35,6 +35,40 @@ export default {
     about: '关于',
     settings: '设置',
   },
+  nav: {
+    creator: {
+      home: '设计者主页',
+      aiStudio: 'AI 设计室',
+      aiLab: '灵感实验室',
+      works: '作品池',
+      trends: '趋势榜',
+      community: '社区',
+    },
+    manufacturer: {
+      home: '制造商主页',
+      orders: '订单看板',
+      templates: '工艺模板',
+      community: '社区',
+    },
+    buyer: {
+      home: '推荐首页',
+      customize: '开启定制',
+      orders: '我的订单',
+      community: '社区',
+    },
+    roles: {
+      creator: '设计者模式',
+      manufacturer: '制造商模式',
+      buyer: '购买者模式',
+    },
+  },
+  footer: {
+    copyright: 'Copyright © 2026 徐力行. All rights reserved.',
+    university: '合肥工业大学软件学院毕业设计项目',
+  },
+  app: {
+    title: 'GOZU - 动漫创意平台',
+  },
   creator: {
     // 主页
     home: {
@@ -255,6 +289,113 @@ export default {
         title: '草稿列表',
         empty: '暂无草稿',
       },
+    },
+  },
+  community: {
+    title: 'GOZU 社区',
+    subtitle: '创意汇聚，灵感无限',
+    description: '设计者、制造商、购买者共同交流的平台。分享设计心得、探讨工艺技术、发现创意灵感。',
+    stats: {
+      users: '活跃用户',
+      posts: '精彩帖子',
+      interactions: '互动交流',
+    },
+    createPost: '发布帖子',
+    search: {
+      placeholder: '搜索帖子、标签、作者...',
+    },
+    sort: {
+      latest: '最新',
+      hot: '热门',
+      mostLiked: '最多点赞',
+    },
+    categories: {
+      title: '帖子分类',
+      all: '全部',
+      design: '设计分享',
+      tutorial: '教程攻略',
+      showcase: '作品展示',
+      question: '问答求助',
+      trading: '交易交流',
+      chat: '闲聊水区',
+    },
+    actions: {
+      like: '点赞',
+      liked: '已点赞',
+      collect: '收藏',
+      collected: '已收藏',
+      comment: '评论',
+      share: '分享',
+      follow: '关注',
+      following: '已关注',
+    },
+    create: {
+      title: '发布新帖子',
+      back: '返回社区',
+      cancel: '取消',
+      publish: '发布',
+      form: {
+        title: {
+          label: '帖子标题',
+          placeholder: '起一个吸引人的标题（至少5个字）',
+        },
+        summary: {
+          label: '内容摘要',
+          placeholder: '简要描述帖子内容，会显示在列表页（至少10个字）',
+        },
+        content: {
+          label: '帖子正文',
+        },
+        category: {
+          label: '选择分类',
+        },
+        tags: {
+          label: '添加标签',
+          placeholder: '输入标签后按回车添加',
+          add: '添加',
+          hint: '最多5个',
+        },
+      },
+      tips: {
+        title: '发帖小贴士',
+        items: [
+          '标题要简洁明了，突出主题',
+          '摘要用于列表展示，概括核心内容',
+          '添加合适的标签增加曝光',
+          '图文并茂更容易获得互动',
+        ],
+      },
+    },
+    post: {
+      back: '返回社区',
+      author: '作者',
+      time: '发布于',
+      views: '阅读',
+      comments: '评论 ({count})',
+      reply: '回复',
+      replyTo: '回复',
+      replyPlaceholder: '发表你的看法...',
+      replyToPlaceholder: '回复 @{author}...',
+      submitComment: '发表评论',
+      noComments: '暂无评论，快来发表第一条评论吧！',
+    },
+    empty: {
+      noPosts: '暂无相关帖子',
+      noPostsDesc: '换个分类或关键词试试，或者成为第一个发帖的人！',
+      createFirst: '发布第一篇帖子',
+      loading: '加载中...',
+      notFound: '帖子不存在',
+      notFoundDesc: '该帖子可能已被删除或链接无效',
+      backHome: '返回社区',
+    },
+    hot: {
+      posts: '热门推荐',
+      tags: '热门标签',
+    },
+    promo: {
+      title: '成为优质创作者',
+      desc: '发布原创内容，获得更多曝光机会和专属徽章',
+      button: '了解更多',
     },
   },
   auth: {

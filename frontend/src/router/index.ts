@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import LoginView from '@/pages/LoginView.vue'
 import RegisterView from '@/pages/RegisterView.vue'
 import CreatorHomeView from '@/pages/CreatorHomeView.vue'
@@ -23,6 +24,9 @@ import AdminOrdersView from '@/pages/AdminOrdersView.vue'
 import AdminReviewView from '@/pages/AdminReviewView.vue'
 import AdminAnalyticsView from '@/pages/AdminAnalyticsView.vue'
 import AdminSettingsView from '@/pages/AdminSettingsView.vue'
+import CommunityHomeView from '@/pages/CommunityHomeView.vue'
+import CommunityCreateView from '@/pages/CommunityCreateView.vue'
+import CommunityPostView from '@/pages/CommunityPostView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -84,8 +88,19 @@ const router = createRouter({
         { path: 'settings', name: 'admin-settings', component: AdminSettingsView },
       ],
     },
+    // 社区功能 - 三端共享
+    { path: '/community', name: 'community', component: CommunityHomeView },
+    { path: '/community/create', name: 'community-create', component: CommunityCreateView },
+    { path: '/community/post/:id', name: 'community-post', component: CommunityPostView },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView },
   ],
+})
+
+// 动态设置页面标题
+router.beforeEach((to, from, next) => {
+  // 这里需要在组件挂载后才能获取i18n实例，所以暂时使用静态标题
+  // 在组件中会通过watch来动态更新标题
+  next()
 })
 
 export default router

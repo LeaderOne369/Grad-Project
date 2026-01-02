@@ -19,6 +19,8 @@
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@tresjs/cientos": "^4.3.1",
     "@tresjs/core": "^4.3.1",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "apexcharts": "^4.0.0",
     "chart.js": "^4.5.0",
     "d3": "^7.9.0",
