@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useAuth } from '@/composables/useAuth'
 import {
   getPosts,
   getHotPosts,
@@ -12,6 +13,7 @@ import {
 } from '@/services/communityMock'
 
 const { t } = useI18n()
+const { userRole } = useAuth()
 
 const route = useRoute()
 
@@ -26,11 +28,7 @@ const isLoading = ref(false)
 
 // 当前角色
 const currentRole = computed(() => {
-  const path = route.path
-  if (path.includes('/creator') || path.includes('/ai-studio')) return 'creator'
-  if (path.includes('/manufacturer')) return 'manufacturer'
-  if (path.includes('/buyer')) return 'buyer'
-  return 'buyer'
+  return userRole.value || 'buyer'
 })
 
 // 角色主题色

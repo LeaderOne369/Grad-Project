@@ -3,9 +3,11 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { DEFAULT_ACCOUNTS } from '@/services/mockAuth'
-import { login, storeToken } from '@/services/authApi'
+import { login } from '@/services/authApi'
+import { useAuth } from '@/composables/useAuth'
 
 const { t } = useI18n()
+const { setAuth } = useAuth()
 
 const router = useRouter()
 const username = ref('')
@@ -29,7 +31,7 @@ const handleSubmit = async () => {
       username: username.value,
       password: password.value,
     })
-    storeToken(result.access_token)
+    setAuth(result)
     successMessage.value = t('auth.login.messages.welcomeBack', {
       name: result.user?.displayName || t('auth.login.messages.defaultName'),
     })

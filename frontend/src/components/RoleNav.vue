@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import i18n from '../i18n'
+import { useAuth } from '@/composables/useAuth'
 
 const { t } = useI18n()
 
@@ -34,30 +35,28 @@ const route = useRoute()
 const showSettings = ref(false)
 const showAbout = ref(false)
 
-// 记住上次访问的角色，用于社区等共享页面
-const lastRole = ref(localStorage.getItem('gozu_last_role') || 'buyer')
+const { userRole, isAuthenticated } = useAuth()
 
 const role = computed(() => {
+  // 如果用户已登录，使用用户的角色
+  if (isAuthenticated.value && userRole.value) {
+    return userRole.value
+  }
+
+  // 未登录用户根据路径判断角色
   const path = route.path
   if (
     path.startsWith('/home/creator') ||
     path.startsWith('/creator') ||
     path.startsWith('/ai-studio')
   ) {
-    localStorage.setItem('gozu_last_role', 'creator')
     return 'creator'
   }
   if (path.startsWith('/home/manufacturer') || path.startsWith('/manufacturer')) {
-    localStorage.setItem('gozu_last_role', 'manufacturer')
     return 'manufacturer'
   }
   if (path.startsWith('/home/buyer') || path.startsWith('/buyer')) {
-    localStorage.setItem('gozu_last_role', 'buyer')
     return 'buyer'
-  }
-  // 社区等共享页面使用上次记录的角色
-  if (path.startsWith('/community')) {
-    return lastRole.value as 'creator' | 'manufacturer' | 'buyer'
   }
   return 'guest'
 })
